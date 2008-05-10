@@ -8,5 +8,15 @@ postgresql data contained in Apple Remote Desktop 2/3, and the NetRestore
 imaging system developed by Mike Bombich, which can use the xml resources
 provided by this system to select and control the network imaging process.
 
+For information on Apple Remote Desktop's postgresql data, see:
+http://developer.apple.com/appleapplications/ardsql.html
+
+For more information on Mike Bombich's NetRestore's PHP services system
+(which this system supplants), see:
+http://www.bombich.com/software/docs/NetRestore%20PHPServices/index.html
+
+The trouble ticket system is modeled after MyTechDesk.  See:
+http://mytechdesk.org
+
 Information requests, comments, forks, etc. should be directed to
 pzingg AT kentfieldschools FULLSTOP org
