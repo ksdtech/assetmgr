@@ -1,0 +1,12 @@
+assetmgr - Asset Management System
+copyright (c) 2008 Kentfield School District
+
+This is an attempt to combine a hardware and software asset management system
+together with a trouble ticket system, and link data to an (externally 
+maintained) inventory system and two Mac-specific data systems: the
+postgresql data contained in Apple Remote Desktop 2/3, and the NetRestore
+imaging system developed by Mike Bombich, which can use the xml resources
+provided by this system to select and control the network imaging process.
+
+Information requests, comments, forks, etc. should be directed to
+pzingg AT kentfieldschools FULLSTOP org
