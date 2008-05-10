@@ -1,0 +1,17 @@
+<h1>Editing ticket_category</h1>
+
+<%= error_messages_for :ticket_category %>
+
+<% form_for(@ticket_category) do |f| %>
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @ticket_category %> |
+<%= link_to 'Back', ticket_categories_path %>

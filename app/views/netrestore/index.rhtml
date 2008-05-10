@@ -1,0 +1,7 @@
+<p>This web page will return a plist-formatted document when provided with a MAC Address.</p>
+<p>NetRestore parses the plist file and uses it to populate its Configurations and Parameters.</p>
+<p>NetRestore also uses the data for setting machine-specific settings after imaging.</p>
+<p><img src="/images/remotesettings.png" border="1"></p>
+<% if @error %><p style="color:red; font-weight:bold">Error: <%=h @error %></p><% end %>
+<p>To retrieve a record from this page, format the URL like this:</p>
+<p><%= link_to '/netrestore?hw=00:0a:95:c4:21:9c&gp=Apple&p=apple', '/netrestore?hw=00:0a:95:c4:21:9c&gp=Apple&p=apple' %></p>

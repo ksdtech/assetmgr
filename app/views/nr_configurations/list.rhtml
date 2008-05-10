@@ -1,0 +1,31 @@
+<h1>Listing NetRestore configurations</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Protocol</th>
+    <th>Host</th>
+    <th>Share</th>
+    <th>Path</th>
+  </tr>
+  
+<% for nr_configuration in @nr_configurations %>
+  <tr>
+    <td><%= nr_configuration.name %></td>
+    <td><%= nr_configuration.protocol %></td>
+    <td><%= nr_configuration.host_or_volume %></td>
+    <td><%= nr_configuration.sharepoint %></td>
+    <td><%= nr_configuration.path %></td>
+    <td><%= link_to 'Show', :action => 'show', :id => nr_configuration %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => nr_configuration %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => nr_configuration }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @nr_configuration_pages.current.previous } if @nr_configuration_pages.current.previous %>
+<%= link_to 'Next page', { :page => @nr_configuration_pages.current.next } if @nr_configuration_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New NetRestore configuration', :action => 'new' %>

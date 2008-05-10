@@ -1,0 +1,6 @@
+<div id="edit">
+	<%= error_messages_for :license %>
+	<% form_for(:license, :url => license_path(@license), :html => { :id => 'edit_form', :method => :put }) do |f| %>
+	<%= render :partial => 'form', :locals => { :f => f } %>
+	<% end %>
+</div>

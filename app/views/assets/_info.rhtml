@@ -1,0 +1,44 @@
+<table width="100%">
+  <tr>
+    <td width="2%"><%= inventory_check(true) %></td>
+    <td width="3%">Edit</td>
+    <td width="3%">Tix</td>
+    <td width="3%">&nbsp;</td>
+    <td width="3%" <%= sort_td_class_helper 'id' %> ><%= sort_link_helper "ID", "id" %></td>
+    <td width="12%" <%= sort_td_class_helper 'name' %> ><%= sort_link_helper "Name", "name" %></td>
+    <td width="9%" <%= sort_td_class_helper 'barcode' %> ><%= sort_link_helper "Barcode", "barcode" %></td>
+    <td width="9%" <%= sort_td_class_helper 'serial' %> ><%= sort_link_helper "Serial #", "serial" %></td>
+    <td width="9%" <%= sort_td_class_helper 'model' %> ><%= sort_link_helper "Model", "model" %></td>
+    <td width="9%">Network</td>
+    <td width="9%" <%= sort_td_class_helper 'status' %> ><%= sort_link_helper "Status", "status" %></td>
+    <td width="9%" <%= sort_td_class_helper 'user' %> ><%= sort_link_helper "User", "user" %></td>
+    <td width="12%" <%= sort_td_class_helper 'location' %> ><%= sort_link_helper "Location", "location" %></td>
+    <% if controller.class == ComputersController %>
+    <td width="10">Group</td>
+    <% end %>
+    <td width="9%">Tags</td>
+    <td width="3%">Del</td>
+  </tr>
+<% for a in @assets %>
+  <tr class="<%= cycle("even", "odd") %> small">
+    <td><%= inventory_check(a.inventoried?) %></td>
+    <td><%= link_to 'Edit', self.send("edit_#{@memb_name}_path", a) %></td>
+    <td><%= tickets_links(a) %></td>
+    <td><input type="checkbox" id="checked_c<%= a.id %>" name="checked[c<%= a.id %>]" value="1" /></td>
+    <td><%=h a.id %></td>
+    <td><%=h a.name %></td>
+    <td <%= duplicate_class_if(a.duplicate_barcode_exists?) %> ><%= link_to_inventory_on(a, :barcode, :barcode) %></td>
+    <td <%= duplicate_class_if(a.duplicate_serial_number_exists?) %> ><%= link_to_inventory_on(a, :serialnum, :serial_number) %></td>
+    <td><%=h a.description_or_model %></td>
+    <td <%= duplicate_class_if(a.duplicate_ip_address_exists?) %> ><span class="highlite"><%=h a.mac_address %></span><%= a.ip_address.blank? ? '&nbsp' : "<br/>#{a.ip_address}" %></td>
+    <td><%=h a.status %></td>
+    <td><%=h a.user.blank? ? '' : a.user.split(/[, ]/).first %></td>
+    <td><%=h a.location %></td>
+    <% if controller.class == ComputersController %>
+    <td><%= link_to_machine_group(a) %></td>
+    <% end %>
+    <td><%=h a.tag_list %></td>
+    <td><%= link_to 'Del', send("#{@memb_name}_path", a), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,0 +1,34 @@
+<table width="100%">
+  <tr>
+    <td width="3%" <%= sort_td_class_helper 'id' %> ><%= sort_link_helper "ID", "id" %></td>
+    <td width="12%" <%= sort_td_class_helper 'name' %> ><%= sort_link_helper "Name", "name" %></td>
+    <td width="9%" <%= sort_td_class_helper 'barcode' %> ><%= sort_link_helper "Barcode", "barcode" %></td>
+    <td width="9%" <%= sort_td_class_helper 'model' %> ><%= sort_link_helper "Model", "model" %></td>
+    <td width="9%">MAC</td>
+    <td width="9%">IP</td>
+    <td width="9%" <%= sort_td_class_helper 'status' %> ><%= sort_link_helper "Status", "status" %></td>
+    <td width="9%" <%= sort_td_class_helper 'user' %> ><%= sort_link_helper "User", "user" %></td>
+    <td width="12%" <%= sort_td_class_helper 'location' %> ><%= sort_link_helper "Location", "location" %></td>
+    <td width="9%">Tags</td>
+    <% if edit %>
+    <td width="3%">Remove</td>
+    <% end %>
+  </tr>
+<% for a in assets %>
+  <tr class="<%= cycle("even", "odd") %> small">
+    <td><%=h a.id %></td>
+    <td><%=h a.name %></td>
+    <td><%=h a.barcode %></td>
+    <td><%=h a.description_or_model %></td>
+    <td><%=h a.mac_address %></td>
+    <td><%=h a.ip_address %></td>
+    <td><%=h a.status %></td>
+    <td><%=h a.user.blank? ? '' : a.user.split(/[, ]/).first %></td>
+    <td><%=h a.location %></td>
+    <td><%=h a.tag_list %></td>
+    <% if edit %>
+    <td><input type="checkbox" id="remove_c<%= a.id %>" name="remove[c<%= a.id %>]" /></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>

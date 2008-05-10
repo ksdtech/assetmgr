@@ -1,0 +1,36 @@
+<!-- live search from http://dev.nozav.org/rails_ajax_table.html -->
+<% form_tag(self.send("#{@coll_name}_path"), { :method => 'get' }) do %>
+<input id="tag" name="tag" type="hidden" />
+<table width="100%">
+	<tr>
+		<td colspan="3"><strong>Search</search> operates on name, barcode, serial number, make, model, user, ip address, and MAC address fields.</td>
+	</tr>
+	<tr>
+		<td class="label"><label for="query">Search:</label></td>
+		<td class="field"><%= text_field_tag :query, @asset_params[:query], :size => 30 %></td>
+		<td class="field"><%= image_tag('spinner.gif', :id => 'spinner',
+			:align  => 'absmiddle',
+			:border => 0,
+			:style  => 'display: none;') %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="status">Status:</label></td>
+		<td colspan="2" class="field"><select name="status" id="status">
+			<%= options_for_select(Asset::STATUS_OPTIONS, @asset_params[:status]) %>
+		</select></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="loc">Location:</label></td>
+		<td colspan="2" class="field"><%= text_field_tag :loc, @asset_params[:loc], :size => 15 %></td>
+	</tr>
+	<tr>
+		<td class="label">Filter by tag:</td>
+		<td colspan="2" class="field"><%= tag_links(@asset_class) %></td>
+	</tr>
+	<tr>
+		<td class="label">&nbsp;</td>
+		<td colspan="2" class="field"><%= submit_tag 'Search' %></td>
+	</tr>	
+</table>
+<% end %>
+

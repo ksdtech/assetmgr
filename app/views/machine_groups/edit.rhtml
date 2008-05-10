@@ -1,0 +1,13 @@
+<h1>Editing machine group</h1>
+
+<% form_tag :action => 'update', :id => @machine_group do %>
+<%= render :partial => 'form' %>
+<% if @machine_group.computers.size > 0 %>
+<h1>Computers</h1>
+<%= render :partial => 'computers', :locals => { :assets => @machine_group.computers, :edit => true } %>
+<% end %>
+<%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @machine_group %> |
+<%= link_to 'Back', :action => 'list' %>

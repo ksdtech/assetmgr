@@ -1,0 +1,24 @@
+<!-- live search from http://dev.nozav.org/rails_ajax_table.html -->
+<% form_tag(inventory_path, { :method => 'get', :onSubmit => "Element.show('spinner');" }) do %>
+<table width="100%">
+	<tr>
+		<td colspan="3"><strong>Search</search> operates on barcode, serial number, make and model fields.</td>
+	</tr>
+	<tr>
+		<td class="label"><label for="query">Search:</label></td>
+		<td class="field"><%= text_field_tag :query, params['query'], :size => 30 %></td>
+		<td class="field"><%= image_tag('spinner.gif', :id => 'spinner',
+			:align  => 'absmiddle',
+			:border => 0,
+			:style  => 'display: none;') %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="loc">Location:</label></td>
+		<td colspan="2" class="field"><%= text_field_tag :loc, params['loc'], :size => 15 %></td>
+	</tr>
+	<tr>
+		<td class="label">&nbsp;</td>
+		<td colspan="2" class="field"><%= submit_tag 'Search' %></td>
+	</tr>
+</table>
+<% end %>

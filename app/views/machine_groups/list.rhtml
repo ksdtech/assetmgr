@@ -1,0 +1,22 @@
+<h1>Listing machine groups</h1>
+
+<%= will_paginate @machine_groups %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Computers</th>
+    <th colspan="2">&nbsp;</th>
+  </tr>
+
+<% for machine_group in @machine_groups %>
+  <tr>
+    <td><%=h machine_group.name %></td>
+    <td><%= link_to "#{machine_group.computers.size}", :action => 'show', :id => machine_group %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => machine_group %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => machine_group }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+
+<%= link_to 'New machine group', new_machine_group_path %>

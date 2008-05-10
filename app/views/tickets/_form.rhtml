@@ -1,0 +1,119 @@
+<table width="100%">
+  <tr><td colspan="3" bgcolor="#CCCCCC">Task</td></tr>
+<% if @ticket.asset.nil? %>
+  <tr><td colspan="3">Not linked to any asset</td></tr>
+<% end %>
+<% if help_staff? %>
+  <tr><td>
+    <label for="ticket_asset_query">First search assets...</label><br/>
+    <%= f.text_field :asset_query, :size => 20 %></td>
+    <%= observe_field(:ticket_asset_query, :frequency => 0.25, :update => :ticket_asset_link, 
+      :with => 'query', :url => '/search') %>
+  <td colspan="2">
+    <label for="ticket_asset_link">Then select to add, change or remove asset link</label><br/>
+    <select id="ticket_asset_link" name="ticket[asset_link]">
+      <%= options_for_asset_link(@ticket.asset_query, @ticket.asset_link) %>
+    </select></td>
+  </tr>
+<% end %>
+  <tr><td colspan="2">
+    <label for="ticket_subject">Subject</label><br/>
+    <%= f.text_field :subject, :size => 60 %></td>
+  <td>
+    <label for="ticket_requestor_id">Requestor</label><br/>
+<% if help_staff? %>
+    <%= f.select :requestor_id, User.options_for_requestor, { :include_blank => 'Select requestor...' } %>
+<% else %>
+    <%= h @ticket.requestor_name %><input type="hidden" name="ticket[requestor_id]" value="<%= @ticket.requestor_id %>"/>
+<% end %>
+  </td>
+  </tr>
+  <tr><td>
+    <label for="ticket_category">Category</label><br/>
+    <%= f.select :ticket_category_id, TicketCategory.find(:all).collect {|c| [ c.name, c.id ] }, { :include_blank => 'Select category...' } %></td>
+<% if help_staff? %>
+  <td>
+    <label for="ticket_priority">Priority</label><br/>
+    <%= f.select :priority, Ticket.options_for_priority, { :include_blank => 'Select priority...' } %></td>
+  <td>
+    <label for="ticket_importance">Importance</label><br/>
+    <span id="ticket_importance"><%= @ticket.importance_to_s %></span></td>
+<% else %>
+  <td colspan="2">
+    <label for="ticket_importance">Importance</label><br/>
+    <%= f.select :importance, Ticket.options_for_priority, { :include_blank => 'Select importance...' } %></td>
+<% end %>
+  </tr>
+  <tr><td colspan="3">
+    <label for="ticket_description">Description</label><br/>
+    <%= f.text_area :description, :cols => 60, :rows => 5 %></td>
+  </tr>
+<% if help_staff? %>
+  <tr><td>
+    <label for="ticket_page_count">Printer Page Count</label><br/>
+    <%= f.text_field :page_count, :size => 20 %></td>
+  <td>
+    <label for="ticket_cycle_count">Battery Cycle Count</label><br/>
+    <%= f.text_field :cycle_count, :size => 20 %></td>
+  <td>&nbsp;</td>
+  </tr>
+  <tr><td>
+    <label for="ticket_assignee_id">Assignee</label><br/>
+    <%= f.select :assignee_id, User.options_for_assignee, { :include_blank => 'Select assignee...' } %></td>
+  <td>
+    <label for="ticket_date_assigned">Date Assigned</label><br/>
+    <%= f.date_select :date_assigned, :start_year => 2008, :default => Time.now %></td>
+  <td>
+    <label for="ticket_date_due">Date Due</label><br/>
+    <%= f.date_select :date_due, :start_year => 2008, :include_blank => true %></td>
+  </tr>
+  <tr><td colspan="3" bgcolor="#CCCCCC">Resolution</td></tr>
+  <tr><td>
+    <label for="ticket_estimated_start_date">Start Date (Est.)</label><br/>
+    <%= f.date_select :estimated_start_date, :start_year => 2008, :include_blank => true %></td>
+  <td>
+    <label for="ticket_estimated_completion_date">Completion Date (Est.)</label><br/>
+    <%= f.date_select :estimated_completion_date, :start_year => 2008, :include_blank => true %></td>
+  <td>&nbsp;</td>
+  </tr>
+  <tr><td>
+    <label for="ticket_status">Status</label><br/>
+    <%= f.select :status, Ticket.options_for_status %></td>
+  <td>
+    <label for="ticket_date_completed">Date Completed</label><br/>
+    <%= f.date_select :date_completed, :start_year => 2008, :include_blank => true %></td>
+  <td><br/><input type="button" id="ticket_complete" value="Complete" onclick="complete_ticket(); return false;"/> <%= f.check_box :notify_requestor, :disabled => 'disabled' %>&nbsp;<label for="ticket_notify_requestor">Notify requestor</label></td>
+  </tr>
+  <tr><td>
+    <label for="ticket_case_number">AppleCare Case #</label><br/>
+    <%= f.text_field :case_number, :size => 20 %></td>
+  <td>
+    <label for="ticket_dispatch_number">AppleCare Dispatch #</label><br/>
+    <%= f.text_field :dispatch_number, :size => 20 %></td>
+  <td>&nbsp;</td>
+  </tr>
+  <tr><td colspan="3">
+    <label for="ticket_response">Response</label><br/>
+    <%= f.text_area :response, :cols => 60, :rows => 5 %></td>
+  </tr>
+  <tr><td colspan="3">
+    <label for="ticket_time_spent">Time Spent</label><br/>
+    <%= f.text_field :time_spent, :size => 5 %> <%= f.select :units_spent, [ [ 'Minutes', 1 ], [ 'Hours', 60 ] ] %> Total Time: <%= @ticket.total_time_to_s %></td>
+  </tr>
+<% end %>
+  <tr><td colspan="3">
+    <%= submit_tag @submit_value %></td>
+  </tr>
+</table>
+<% if help_staff? %>
+<table width="100%">
+  <tr><td colspan="3" bgcolor="#CCCCCC">Response History</td></tr>
+  <% if @ticket.ticket_items.count == 0 %>
+  <tr><td colspan="3">No responses have been added to this item.</td></tr>
+  <% else %>
+  <% for ti in @ticket.ticket_items do %>
+  <tr><td colspan="2"><%= link_to(ymdhmp(ti.created_at), ticket_item_path(ti.id)) %> <%=h ti.response %></td><td align="right"><%= ti.assignee.full_name %></td></tr>
+  <% end %>
+  <% end %>
+</table>
+<% end %>

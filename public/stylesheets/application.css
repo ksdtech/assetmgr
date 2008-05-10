@@ -1,0 +1,53 @@
+body { 
+  font-family: verdana; 
+  font-size: 10pt; }
+h1 { 
+  padding-top: 6px;
+  font-size: 12pt; }
+  
+.highlite {
+  color: blue; }
+.duplicate {
+  color: red; }
+
+/* form styles */
+table {
+  border-collapse: collapse; }
+td {
+  vertical-align: top;
+  margin: 3px 3px 3px 0;
+  padding: 3px 3px 3px 0; }
+tr.small td {
+  font-size: 8pt; }
+tr.even { 
+  background: #e2f9e3; }
+td.label { 
+  text-align: right;
+  padding-right: 6px;
+  width: 25%; }
+td.field { 
+  text-align: left; 
+  padding-left: 6px; }
+td.fieldinfo { 
+  font-style: italic;
+  text-align: left;
+  padding-left: 6px;
+  width: 60%; }
+  
+/* flash notice styles */
+h4.alert  {
+  font-size: 0.8em;
+  font-weight: bold;
+  margin: 0;
+  padding: 5px; }
+h4.error  {
+  color: #fff; 
+  background: #c00; }
+h4.notice {
+  color: #060;
+  background: #e2f9e3; }
+  
+.errorExplanation li {
+  color: red;
+}
+

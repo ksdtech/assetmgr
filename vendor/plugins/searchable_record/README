@@ -1,0 +1,125 @@
+= SearchableRecord
+
+A small Ruby on Rails plugin that makes the parsing of query parameters from
+URLs easy for resources, allowing the requester to control the items (records)
+shown in the resource's representation.
+
+The implementation is a helper module (a mixin) for ActiveRecord models. It is
+used by including SearchableRecord module in a model.
+
+The mixin provides a class method, <tt>find_queried</tt>, to the class that
+includes it. The method is a frontend to ActiveRecord::Base#find: it parses
+query parameters against the given rules and calls <tt>find</tt> accordingly,
+returning the results of <tt>find</tt>.
+
+== A usage example
+
+The following example, although a bit contrived, allows the client to
+
+*  limit the number of items as the result of the search
+   (<tt>limit</tt> parameter),
+*  set an offset for the items (<tt>offset</tt> parameter, intended to be used
+   together with <tt>limit</tt>),
+*  sort the items either in ascending (<tt>sort</tt> parameter) or descending
+   (<tt>rsort</tt> parameter) order by items' type and name,
+*  to limit the result by matching only items that were update before
+   (<tt>until</tt> parameter) or after (<tt>since</tt> parameter) a certain
+   date, and
+*  to limit the result by matching only items with certain kind of
+   types (<tt>type</tt> parameter) or names (<tt>name</tt> parameter), or both
+   (for a name, a conversion to the client supplied parameter must be applied
+   before matching the name in the database).
+
+   
+These requirements for the query parameters are expressed as the following
+rules:
+   
+    rules = {
+      :limit    => nil,                 # key as a flag; the value for the key is not used
+      :offset   => nil,                 # key as a flag
+      :sort     => { 'name' => 'items.name', 'created' => 'items.created_at' },
+      :rsort    => nil,                 # rsort is allowed according to rules in :sort (key as a flag)
+      :since    => 'items.created_at',  # cast parameter value as the default type
+      :until    => 'items.created_at',  # cast parameter value as the default type
+      :patterns => { :type => 'items.type', # match the pattern with the default operator and converter
+                     :name => { :column    => 'items.name',
+                                :converter => lambda { |val| "%#{val.gsub('_', '.')}%" } } }
+                                        # match the pattern with the default operator
+    }
+
+The client wants to use the URL
+<tt>http://example-site.org/items?limit=5&offset=4&rsort=name&since=2008-02-28&name=foo_bar</tt>
+to fetch a representation of the resource containing the items. This results to
+the following parameters:
+    
+    # => query_params = {
+    #      'offset' => '4',
+    #      'limit'  => '5',
+    #      'rsort'  => 'name',
+    #      'until'  => '2008-02-28',
+    #      'name'   => 'foo_bar',
+    #      ...
+    #      # plus Rails specific parameters, such as 'action' and 'controller'
+    # }
+
+In addition, the application happens to require some options to be passed to
+<tt>find</tt>:
+    
+    options = {
+      :include    => [ :owners ],
+      :conditions => "items.flag = 'f'"
+    }
+
+When <tt>find_queried</tt> is called, with
+    
+    Item.find_queried(:all, query_params, rules, options)
+
+the result is the following call to <tt>find</tt>.
+   
+    Item.find(:all,
+              :include => [ :owners ],
+              :order   => 'items.name desc',
+              :offset  => 4,
+              :limit   => 5,
+              :conditions => [ "(items.flag = 'f') and (items.created_at <= cast(:until as datetime)) and (items.name like :name)",
+                               { :until => '2008-02-28', :name => '%foo.bar%' } ])
+
+The search result for <tt>find</tt> contains at most 5 items that are
+
+*  from offset 4 (that is, items from positions 5 to 9),
+*  sorted in descending order by items' names,
+*  updated since 2008-02-28, and
+*  have <tt>foo.bar</tt> in their name.
+
+See +find_queried+ method in SearchableRecord::ClassMethods for usage documentation.
+
+== Installation
+
+In order to checkout the source code to the current working directory, execute:
+
+  svn co http://searchable-rec.rubyforge.org/svn/trunk
+
+=== Installation with Subversion svn:externals to a Ruby on Rails project
+
+In the root directory of the project, execute:
+
+  svn propedit svn:externals vendor/plugins
+
+Add the following line to the file with an editor:
+  
+  searchable-rec http://searchable-rec.rubyforge.org/svn/trunk
+
+Save and exit the editor. Execute:
+  
+  svn ci -m 'Updated svn:external property for SearchableRecord.' vendor/plugins
+  svn up vendor/plugins
+
+== Contacting
+
+Please send comments, suggestions, bugs, or patches by email to Tuomas Kareinen < tkareine (at) gmail (dot) com >.
+
+== Legal note
+
+Copyright (c) 2008 Tuomas Kareinen.
+
+SearchableRecord plugin is licensed under the MIT license.

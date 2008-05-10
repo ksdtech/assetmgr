@@ -1,0 +1,55 @@
+<table width="100%">
+	<tr>
+		<td class="label"><label for="software_license_application">Application name:</label></td>
+		<td class="field"><%= f.text_field :application, :size => 30 %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="software_license_manufacturer">Publisher:</label></td>
+		<td class="field"><%= f.text_field :publisher, :size => 30 %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="software_license_version">Version:</label></td>
+		<td class="field"><%= f.text_field :version, :size => 20 %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="software_license_os">Operating system:</label></td>
+		<td class="field"><%= f.select :os, 
+		  [ ['MacOS X', 'macosx'], ['MacOS 9', 'macos9'], ['Windows XP', 'win32'], ['Multiple', 'multiple' ], ['Linux', 'linux'] ], :include_blank => true %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="software_license_serial_number">Serial #:</label></td>
+		<td class="field"><%= f.text_area :serial_number, :rows => 2 %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="software_license_name_on_license">Name on license:</label></td>
+		<td class="field"><%= f.text_field :name_on_license, :size => 20  %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="software_license_install_key">Install key or password:</label></td>
+		<td class="field"><%= f.text_area :install_key, :rows => 2 %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="software_license_user">Use or user:</label></td>
+		<td class="field"><%= f.text_field :use, :size => 20  %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="software_license_location">Location:</label></td>
+		<td class="field"><%= f.text_field :location, :size => 20  %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="software_license_number_of_licenses">Number of licenses:</label></td>
+		<td class="field"><%= f.text_field :number_of_licenses, :size => 5  %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="software_license_number_of_licenses">Number installed:</label></td>
+		<td class="field"><%= f.text_field :number_installed, :size => 5  %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="software_license_notes">Notes:</label></td>
+		<td class="field"><%= f.text_area :notes, :rows => 4 %></td>
+	</tr>
+	<tr>
+		<td class="label">&nbsp;</td>
+		<td class="field"><%= submit_tag @submit_value %></td>
+	</tr>
+</table>

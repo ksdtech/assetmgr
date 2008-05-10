@@ -1,0 +1,46 @@
+<table width="100%">
+	<tr>
+		<td class="label">Description:</td>
+		<td class="field"><%=h @asset.item %></td>
+	</tr>
+	<tr>
+		<td class="label">Barcode:</td>
+		<td class="field"><%=h @asset.barcode %></td>
+	</tr>
+	<tr>
+		<td class="label">Serial #:</td>
+		<td class="field"><%=h @asset.serialnum %></td>
+	</tr>
+	<tr>
+		<td class="label">Make:</td>
+		<td class="field"><%= @asset.make %></td>
+	</tr>
+	<tr>
+		<td class="label">Model:</td>
+		<td class="field"><%= @asset.model %></td>
+	</tr>
+	<tr>
+		<td class="label">Site:</td>
+		<td class="field"><%= @asset.sitename %></td>
+	</tr>
+	<tr>
+		<td class="label">Room:</td>
+		<td class="field"><%= @asset.room_no %></td>
+	</tr>
+	<tr>
+		<td class="label">Acquired:</td>
+		<td class="field"><%= @asset.acqdate %></td>
+	</tr>
+	<tr>
+		<td class="label">P.O. #:</td>
+		<td class="field"><%= @asset.ponumber %></td>
+	</tr>
+	<tr>
+		<td class="label">Vendor:</td>
+		<td class="field"><%= @asset.vendor %></td>
+	</tr>
+	<tr>
+		<td class="label">Cost:</td>
+		<td class="field"><%= @asset.acqcost %></td>
+	</tr>
+</table>

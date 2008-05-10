@@ -1,0 +1,27 @@
+<!-- # http://dev.nozav.org/rails_ajax_table.html -->
+<div id="results_count">
+<table width="100%">
+	<tr>
+		<td width="85%" align="left" valign="top"><%= @assets.total_entries %> records found<%= with_current_tag %><br/>
+<% if @assets.page_count > 1 %>
+<%= will_paginate @assets %>
+<% else %>
+Page 1 of 1
+<% end %></td>
+		<td width="15%" align="right" valign="top"><% form_tag(send("new_#{@memb_name}_path"), :method => :get) do %><%= submit_tag "Add New Record" %><% end %></td>
+	</tr>
+</table>
+</div>
+<div id="results_table">
+<% form_tag(:id => 'asset_form') do %>
+<%= render :partial => 'assets/info' %>
+<p><%= link_to 'Check all', '#', :id => 'asset_check_all', :onclick =>
+"check_all('asset_form')" %>, 
+<%= link_to 'Clear all', '#', :id => 'asset_clear_all', :onclick =>
+"clear_all('asset_form')" %></p>
+<p>With selected items: <br/>
+  <input type="submit" name="add_to_group" value="Add to Machine Group:" />
+  <select name="machine_group"><%= machine_group_options %></select></p>
+<% end %>
+</div>
+

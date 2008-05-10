@@ -1,0 +1,9 @@
+<h1>Editing NetRestore configuration</h1>
+
+<% form_tag :action => 'update', :id => @nr_configuration do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @nr_configuration %> |
+<%= link_to 'Back', :action => 'list' %>

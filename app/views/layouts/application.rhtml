@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <title><%=h @title ||= 'Asset Management' %></title>
+  <!-- http://developer.yahoo.com/yui/grids -->
+  <%= stylesheet_link_tag 'reset' %>
+  <%= stylesheet_link_tag 'fonts' %>
+  <%= stylesheet_link_tag 'grids' %>
+  <%= stylesheet_link_tag 'application' %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'alerts' %>
+</head>
+<body>
+<div id="doc2" class="yui-t2">
+   <div id="hd"><h1>Asset Management</h1></div>
+   <div id="bd">
+  <div id="yui-main">
+  <div class="yui-b"><div class="yui-g">
+    <h1><%=h @content_title ||= @title %></h1>
+    <div id="alerts">
+      <!-- http://blog.andreasaderhold.com/2006/07/rails-notifications -->
+      <% if flash.empty? %>
+        <h4 id="flash" class="alert" style="display:none"></h4>
+      <% else %>  
+        <% flash.each do |key, value| -%>
+          <h4 id="flash" class="alert <%= key %>"><%= value %></h4>
+        <% end %>
+      <% end %>
+    </div>
+    <div id="content">
+      <%= yield %>
+    </div>
+  </div>
+</div>
+  </div>
+  <div class="yui-b">
+    <!-- YOUR NAVIGATION GOES HERE -->
+    <div id="nav">
+<% if administrator? %>
+      <h1>Asset Data</h1>
+      <ul>
+        <li><%= link_to 'Computers', computers_path %></li>
+        <li><%= link_to 'Printers', printers_path %></li>
+        <li><%= link_to 'Wireless', wireless_path %></li>
+        <li><%= link_to 'Network', network_path %></li>
+        <li><%= link_to 'Other Assets', others_path %></li>
+        <li><%= link_to 'Surplus List', :controller => 'surplus', :action => 'index' %></li>
+      </ul>
+      <h1>Imaging/NetRestore</h1>
+      <ul>
+        <li><%= link_to 'Machine Groups', machine_groups_path %></li>
+        <li><%= link_to 'Configurations', :controller => 'nr_configurations', :action => 'index' %></li>
+        <li><%= link_to 'NetRestore Settings', :controller => 'nr_parameters', :action => 'index' %></li>
+      </ul>
+      <h1>Other</h1>
+      <ul>
+        <li><%= link_to 'Trouble Tickets', tickets_path %></li>
+        <li><%= link_to 'Submit a Ticket', new_ticket_path %></li>
+        <li><%= link_to 'Fixed Asset Inventory', inventory_path %></li>
+        <li><%= link_to 'Software Inventory', licenses_path %></li>
+        <li><%= link_to 'User Profiles', users_path %></li>
+      </ul>
+<% elsif help_staff? %>
+      <ul>
+        <li><%= link_to 'My Profile', edit_user_path(session[:user]) %></li>
+        <li><%= link_to 'Trouble Tickets', tickets_path %></li>
+        <li><%= link_to 'Submit a Ticket', new_ticket_path %></li>
+      </ul>
+<% else %>
+      <ul>
+        <li><%= link_to 'My Profile', edit_user_path(session[:user]) %></li>
+        <li><%= link_to 'My Tickets', requested_tickets_path(session[:user])%></li>
+        <li><%= link_to 'Submit a Ticket', new_ticket_path %></li>
+      </ul>
+<% end %>
+    </div>
+  </div>
+  </div>
+   <div id="ft">Copyright (c) 2007 Kentfield School District</div>
+</div>
+</body>
+</html>

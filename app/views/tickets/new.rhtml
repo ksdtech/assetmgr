@@ -1,0 +1,6 @@
+<div id="edit_new">
+	<%= error_messages_for :ticket %>
+	<% form_for(:ticket, :url => @coll_url) do |f| %>
+	<%= render :partial => 'form', :locals => { :f => f } %>
+	<% end %>
+</div>

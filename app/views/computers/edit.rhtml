@@ -1,0 +1,13 @@
+<div id="edit">
+	<%= error_messages_for :asset %>
+	<% form_for(:asset, :url => computer_path(@asset), :html => { :id => 'edit_form', :method => :put }) do |f| %>
+	<%= render :partial => 'form', :locals => { :f => f } %>
+	<% end %>
+</div>
+<!-- Note: the javascript code below stops the enter key, if pressed anywhere 
+  on the form, from causing a form submit. Prototype.js traps the keydown 
+  event, then the keypress event.  You must put the observe function on the
+  keypress event to cancel it from being passed to the submit process. -->
+<script type="text/javascript">
+Event.observe('edit_form', 'keypress', function(event) { if (event.keyCode == 13) Event.stop(event); }, false);
+</script>

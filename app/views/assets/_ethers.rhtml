@@ -1,0 +1,18 @@
+<% for e in a.ethers do %>
+<tr>
+	<td>&nbsp;</td>
+	<td class="field"><input type="text" id="<%= "#{obj}_ether_#{e.id}_mac_address" %>" name="<%= "#{obj}[ether][#{e.id}][mac_address]" %>" size="18" value="<%= e.mac_address %>"/></td>
+	<td class="field"><input type="text" id="<%= "#{obj}_ether_#{e.id}_interface_id" %>" name="<%= "#{obj}[ether][#{e.id}][interface_id]" %>" size="4" value="<%= e.interface_id %>"/> 
+		<select id="<%= "#{obj}_ether_#{e.id}_media_type" %>" name="<%= "#{obj}[ether][#{e.id}][media_type]" %>">
+			<%= options_for_select(Ether::MEDIA_TYPE_OPTIONS, e.media_type) %></select></td>
+</tr>
+<% end %>
+<% 0.upto(2) do |i| %>
+<tr>
+	<td class="label"><%=  i == 0 ? "<label for=\"#{obj}_new_ether_#{i}_mac_address\">New MAC addresses:</label>" : '&nbsp' %></td>
+	<td class="field"><input type="text" id="<%= "#{obj}_new_ether_#{i}_mac_address" %>" name="<%= "#{obj}[new_ether][#{i}][mac_address]" %>" size="18" value=""/></td>
+	<td class="field"><input type="text" id="<%= "#{obj}_new_ether_#{i}_interface_id" %>" name="<%= "#{obj}[new_ether][#{i}][interface_id]" %>" size="4" value=""/> 
+		<select id="<%= "#{obj}_new_ether_#{i}_media_type" %>" name="<%= "#{obj}[new_ether][#{i}][media_type]" %>">
+			<%= options_for_select(Ether::MEDIA_TYPE_OPTIONS) %></select></td>
+</tr>
+<% end %>

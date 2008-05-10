@@ -1,0 +1,26 @@
+<h1>Listing NetRestore settings</h1>
+
+<table>
+  <tr>
+    <th width="30%">Name</th>
+    <th width="50%">Description</th>
+    <th colspan="3">
+  </tr>
+  
+<% for nr_parameter in @nr_parameters %>
+  <tr>
+    <td><%=h nr_parameter.name %></td>
+    <td><%=h nr_parameter.description %></td>
+    <td><%= link_to 'Show', :action => 'show', :id => nr_parameter %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => nr_parameter %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => nr_parameter }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @nr_parameter_pages.current.previous } if @nr_parameter_pages.current.previous %>
+<%= link_to 'Next page', { :page => @nr_parameter_pages.current.next } if @nr_parameter_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New settings', :action => 'new' %>

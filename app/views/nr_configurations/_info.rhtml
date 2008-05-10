@@ -1,0 +1,6 @@
+<% for column in NrConfiguration.content_columns %>
+<tr>
+  <td><b><%= column.human_name %></b></td>
+  <td><%=h @nr_configuration.send(column.name) %></td>
+</tr>
+<% end %>

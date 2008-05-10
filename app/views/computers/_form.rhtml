@@ -1,0 +1,89 @@
+<table width="100%">
+	<tr>
+		<td class="label">&nbsp;</td>
+		<td colspan="2" class="field"><%= f.check_box :inventoried, @asset.inventoried? ? { :disabled =>'disabled' } : { } %> Inventoried (<%= @current_inventory.name %>)</td>
+	</tr>
+	<tr>
+		<td class="label">&nbsp;</td>
+		<td colspan="2" class="field"><%= submit_tag @submit_value %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_name">Name:</label></td>
+		<td colspan="2" class="field"><%= f.text_field :name, :size => 20 %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_unix_hostname">Bonjour/UNIX Name:</label></td>
+		<td class="field"><%= f.text_field :unix_hostname, :size => 20 %></td>
+		<td><input type="checkbox" name="reset_bonjour" id="reset_bonjour" value="1" onclick="do_reset_bonjour();" />
+		  <label for="reset_bonjour">Reset Bonjour name</label></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_manufacturer">Make:</label></td>
+		<td colspan="2" class="field"><%= f.text_field :manufacturer, :size => 20 %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_description">Model:</label></td>
+		<td class="field"><%= f.text_field :description, :size => 20 %></td>
+		<td class="fieldinfo"><%=h @asset.apple_model %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_item_class">Type:</label></td>
+		<td colspan="2" class="field"><%= f.text_field :item_class, :size => 20 %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_barcode">Barcode:</label></td>
+		<td colspan="2" class="field"><%= f.text_field :barcode, :size => 12 %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_serial_number">Serial #:</label></td>
+		<td colspan="2" class="field"><%= f.text_field :serial_number, :size => 20  %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_status">Status:</label></td>
+		<td colspan="2" class="field"><%= f.select :status, Asset::STATUS_OPTIONS %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_location">Location:</label></td>
+		<td colspan="2" class="field"><%= f.text_field :location, :size => 20  %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_user">User:</label></td>
+		<td colspan="2" class="field"><%= f.text_field :user, :size => 20  %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_ip_address">IP Address:</label></td>
+		<td class="field"><%= f.text_field :ip_address, :size => 15 %></td>
+		<td class="fieldinfo"><%=h @asset.ip_config_method || 'DHCP?' %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_user">Net Location:</label></td>
+		<td colspan="2" class="field"><%= f.select :network_location, Asset::NETWORK_LOCATION_OPTIONS %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_user">Net Port:</label></td>
+		<td colspan="2" class="field"><%= f.select :network_port, Asset::NETWORK_PORT_OPTIONS %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_mac_address">MAC Addresses:</label></td>
+		<td class="field"><%= f.text_field :mac_address, :size => 18 %></td>
+		<td class="fieldinfo">Primary (machine id)</td>
+	</tr>
+	<%= render :partial => 'assets/ethers', :locals => { :a => @asset, :obj => :asset } %>
+	<tr>
+		<td class="label"><label for="asset_surplus_item_number">Surplus Item #:</label></td>
+		<td colspan="2" class="field"><%= f.text_field :surplus_item_number, :size => 15 %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="machine_group_id">Machine Group:</label></td>
+		<td colspan="2" class="field"><%= f.select :machine_group_id, 
+		  MachineGroup.find(:all, :order => 'name').collect {|p| [ p.name, p.id ] }, :include_blank => true %></td>
+	</tr>
+	<tr>
+		<td class="label"><label for="asset_tag_list">Tags:</label></td>
+		<td colspan="2" class="field"><%= f.text_field :tag_list, :size => 50 %></td>
+	</tr>
+	<tr>
+		<td class="label">&nbsp;</td>
+		<td colspan="2" class="field"><%= submit_tag @submit_value %> | <%= submit_tag 'With matching ARD data' %></td>
+	</tr>
+</table>

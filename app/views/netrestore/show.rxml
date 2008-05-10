@@ -1,0 +1,72 @@
+xml.instruct!
+xml.plist(:version => '1.0') {
+  xml.dict {
+    xml.key 'machine_settings'
+    xml.dict {
+      xml.key 'Authorized'
+      xml.true
+      for k, v in @nr_machine_settings
+        xml.key k.to_s
+        xml.string v.to_s
+      end
+    }
+    
+    xml.key 'parameters'
+    xml.dict {
+      xml.key 'debug'
+      xml.true
+      xml.key 'sourceConfigName'
+      xml.string @nr_configuration['name']
+      xml.key 'targetDiskName'  
+      xml.string @nr_parameter['target_disk_name']
+      xml.key 'eraseTarget'
+      @nr_parameter['erase_target'] ? xml.true : xml.false
+      xml.key 'verifyRestore'
+      @nr_parameter['verify_restore'] ? xml.true : xml.false
+      xml.key 'setTargetAsBootDisk'
+      @nr_parameter['set_target_as_boot_disk'] ? xml.true : xml.false
+      xml.key 'shouldRestart'
+      @nr_parameter['should_restart'] ? xml.true : xml.false
+      xml.key 'fullyAutomate'
+      @nr_parameter['fully_automate'] ? xml.true : xml.false
+      xml.key 'disableOwn'
+      @nr_parameter['disable_own'] ? xml.true : xml.false
+      xml.key 'rebuildDesktop'
+      @nr_parameter['rebuild_desktop'] ? xml.true : xml.false
+      xml.key 'buffers'
+      xml.array {
+        @nr_parameter['buffers'].split(',').each do |buf|
+          xml.integer buf
+        end
+      }
+      xml.key 'tools'
+      xml.array {
+        0.upto 4 do |i|
+          xml.string((i < @nr_tools.size) ? @nr_tools[i]['tool_name'] : 'Customize')
+        end
+      }
+      xml.key 'commands'
+      xml.array {
+        0.upto 4 do |i|
+          xml.string((i < @nr_tools.size) ? "#{@nr_tools[i]['command']} 1>>/tmp/NetRestore.log 2>>/tmp/error.log &" : 'Customize')
+        end
+      }
+    }
+    
+    xml.key 'configurations'
+    xml.dict {
+      for c in @all_nr_configurations
+        xml.key c['name']
+        xml.array {
+          xml.string c['protocol']
+          xml.string c['host_or_volume']
+          xml.string c['sharepoint']
+          xml.string c['path']
+          xml.string c['username']
+          xml.string c['password']
+          xml.string c['description']
+        }
+      end
+    }
+  }
+}

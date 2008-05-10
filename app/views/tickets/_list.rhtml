@@ -1,0 +1,28 @@
+<table width="100%">
+	<tr>
+		<td width="4%"  <%= sort_td_class_helper 'id' %> ><%= sort_link_helper "Tkt&nbsp;\#", "id" %></td>
+		<% if @show_asset %><td width="40%" <%= sort_td_class_helper 'requestor' %> ><%= sort_link_helper "Asset", "asset" %></td><% end %>
+		<td width="40%">Subject</td>
+		<td width="8%"  <%= sort_td_class_helper 'requestor' %> ><%= sort_link_helper "Requestor", "requestor" %></td>
+		<td width="8%"  <%= sort_td_class_helper 'assignee' %> ><%= sort_link_helper "Assignee", "assignee" %></td>
+		<td width="10%" <%= sort_td_class_helper 'status' %> ><%= sort_link_helper "Status", "status" %></td>
+		<td width="8%"  <%= sort_td_class_helper 'adate' %> ><%= sort_link_helper "Assigned", "adate" %></td>
+		<td width="8%"  <%= sort_td_class_helper 'ddate' %> ><%= sort_link_helper "Due", "ddate" %></td>
+		<td width="8%">Completed</td>
+		<% if help_staff? %><td width="4%">Del</td><% end %>
+	</tr>
+<% for t in @tickets %>
+	<tr class="<%= cycle("even", "odd") %> small">
+		<td><%= link_to t.id, edit_ticket_path(t) %></td>
+		<% if @show_asset %><td><%= !t.asset.nil? ? link_to(t.asset.name_or_id, send(t.asset.edit_path, t.asset)) : '&nbsp;' %></td><% end %>
+		<td><%=h t.subject %></td>
+		<td><%=h t.requestor_to_s %></td>
+		<td><%=h t.assignee_to_s %></td>
+		<td><%=h Ticket::STATUS_OPTIONS[t.status] %></td>
+		<td><%= ymd t.date_assigned %></td>
+		<td><%= ymd t.date_due %></td>
+		<td><%= ymd t.date_completed %></td>
+		<% if help_staff? %><td><%= link_to 'Del', ticket_path(t), :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+	</tr>
+<% end %>
+</table>

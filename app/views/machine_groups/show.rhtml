@@ -1,0 +1,17 @@
+<h1><%= @machine_group.name %> Machine Group</h1>
+<h1>Computers</h1>
+<% if @machine_group.computers.size > 0 %>
+<%= render :partial => 'computers', :locals => { :assets => @machine_group.computers, :edit => false } %>
+<% else %><p>No computers in this group</p><% end %>
+<table>
+<tr><td colspan="2"><h1>Configuration</h1></td></tr>
+<% if @nr_configuration %>
+<%= render :partial => 'nr_configurations/info' %>
+<% else %><tr><td colspan="2">Not specified</td></tr><% end %>
+<tr><td colspan="2"><h1>Parameters</h1></td></tr>
+<% if @nr_parameter %>
+<%= render :partial => 'nr_parameters/info' %>
+<% else %><tr><td colspan="2">Not specified</td></tr><% end %>
+</table>
+<%= link_to 'Edit', :action => 'edit', :id => @machine_group %> |
+<%= link_to 'Back', :action => 'list' %>

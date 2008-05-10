@@ -1,0 +1,2 @@
+page.assign "$('tag').value", params[:tag]
+page.replace_html :search_results, :partial => 'assets/list'

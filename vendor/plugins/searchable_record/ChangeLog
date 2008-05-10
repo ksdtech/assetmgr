@@ -1,0 +1,13 @@
+2008-03-03  tuomas
+
+	* ChangeLog: Updated ChangeLog.
+	* ChangeLog, README, Rakefile: Added ChangeLog. Improved README and
+	  Rakefile.
+
+2008-02-29  tuomas
+
+	* README: Updated README.
+	* README, Rakefile, init.rb, lib, test, README, Rakefile, init.rb,
+	  lib, test: Fixing initial import.
+	* .: Fixing initial import.
+

@@ -1,0 +1,19 @@
+<div id="ticket_search"><%= render :partial => 'tickets/search' %></div>
+<div id="ticket_list">
+<% if @back_path %><%= link_to 'Back', @back_path %><% end %>
+<div id="ticket_results">
+<table width="100%">
+	<tr>
+		<td width="85%" align="left" valign="top"><%= @tickets.total_entries %> records found<br/>
+      <%= will_paginate @tickets %></td>
+		<td width="15%" align="right" valign="top">
+			<% form_tag(@new_memb_path, :method => :get) do %>
+			<%= submit_tag "Add New Record" %>
+			<% end %>
+		</td>
+	</tr>
+</table>
+</div>
+<%= render :partial => 'list' %>
+<% if @back_path %><%= link_to 'Back', @back_path %><% end %>
+</div>

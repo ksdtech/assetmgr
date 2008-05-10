@@ -1,0 +1,25 @@
+<div id="ethers">
+<table width="200">
+	<tr>
+		<td width="10%">Edit</td>
+		<td width="10%">Intf</td>
+		<td width="20%">Media</td>
+		<td width="50%">MAC</td>
+		<td width="10%">Del</td>
+	</tr>
+<% for e in a.ethers %>
+	<tr class="<%= cycle("even", "odd") %> small">
+		<td><%= link_to 'Edit', asset_edit_ether_path(a, e) %></td>
+		<td><%=h e.interface_id %></td>
+		<td><%=h e.media_type %></td>
+		<td><%=h e.mac_address %></td>
+		<td><%= link_to 'Del', asset_ether_path(a, e), :confirm => 'Are you sure?', :method => :delete %></td>
+	</tr>
+<% end %>
+	<tr>
+		<td>&nbsp;</td>
+		<td colspan="3"><% form_tag(asset_new_ether_path(a), :method => :get) do %><%= submit_tag "Add New Record" %><% end %></td>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+</div>

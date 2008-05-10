@@ -1,0 +1,20 @@
+<h1>Listing ticket_categories</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% for ticket_category in @ticket_categories %>
+  <tr>
+    <td><%=h ticket_category.name %></td>
+    <td><%= link_to 'Show', ticket_category %></td>
+    <td><%= link_to 'Edit', edit_ticket_category_path(ticket_category) %></td>
+    <td><%= link_to 'Destroy', ticket_category, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New ticket_category', new_ticket_category_path %>

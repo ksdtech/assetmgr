@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <td <%= sort_td_class_helper 'id' %> ><%= sort_link_helper "ID", "id" %></td>
+    <td <%= sort_td_class_helper 'surplus_item_number' %> ><%= sort_link_helper "Item #", 'surplus_item_number' %></td>
+    <td <%= sort_td_class_helper 'desc' %> ><%= sort_link_helper "Desc", "desc" %></td>
+    <td <%= sort_td_class_helper 'manufacturer' %> ><%= sort_link_helper "Mfr", "manufacturer" %></td>
+    <td <%= sort_td_class_helper 'model' %> ><%= sort_link_helper "Model", "model" %></td>
+    <td <%= sort_td_class_helper 'barcode' %> ><%= sort_link_helper "Barcode", "barcode" %></td>
+    <td <%= sort_td_class_helper 'serial' %> ><%= sort_link_helper "Serial #", "serial" %></td>
+  </tr>
+<% for a in @assets %>
+  <tr class="<%= cycle("even", "odd") %> small">
+    <td><%= link_to a.id, self.send(a.edit_path, a) %></td>
+    <td><%=h a.surplus_item_number %></td>
+    <td><%=h a.item_type %></td>
+    <td><%=h a.manufacturer %></td>
+    <td><%=h a.description %></td>
+    <td><%=h a.barcode %></td>
+    <td><%=h a.serial_number %></td>
+  </tr>
+<% end %>
+</table>

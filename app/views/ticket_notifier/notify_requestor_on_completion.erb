@@ -1,0 +1,11 @@
+Trouble Ticket # <%= @ticket.id %> has been completed.
+
+Subject: <%= @ticket.subject %>
+
+Description: <%= @ticket.description %>
+
+Resolved by: <%= @ticket.assignee.full_name %>
+Original assignment date: <%= @ticket.date_assigned %>
+Completion date: <%= @ticket.date_completed %>
+
+Resolution info: <%= @ticket.completion_response %>

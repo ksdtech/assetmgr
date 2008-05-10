@@ -1,0 +1,44 @@
+<h1>Editing user</h1>
+
+<%= error_messages_for :user %>
+
+<% form_for(@user) do |f| %>
+  <p>
+    <b>Site</b><br />
+    <%= f.select :site_id, [ ['District', 102], ['Bacich', 103], ['Kent', 104]] %>
+  </p>
+  <p>
+    <b>First name</b><br />
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <b>Last name</b><br />
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <b>Telephone</b><br />
+    <%= f.text_field :telephone %>
+  </p>
+  <p>
+    <b>Email address</b><br />
+    <%= f.text_field :email_address %>
+  </p>
+<% if administrator? %>
+  <p>
+    <b>Login</b><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <b>Password</b><br />
+    <%= f.text_field :password %>
+  </p>
+  <p><%= f.check_box :accepts_assignments %> <b>Can accept assignments</b></p>
+  <p><%= f.check_box :administrator %> <b>Administrator</b></p>
+<% end %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @user %> |
+<%= link_to 'Back', users_path %>

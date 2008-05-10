@@ -1,0 +1,28 @@
+<div id="results_table">
+<table width="100%">
+  <tr>
+    <td>Vendor</td>
+    <td>Application</td>
+    <td>Ver</td>
+    <td>OS</td>
+    <td>Lic</td>
+    <td>Inst</td>
+    <td>Serial/Key/Notes</td>
+    <td>Edit</td>
+    <td>Del</td>
+  </tr>
+<% for l in @licenses %>
+  <tr class="<%= cycle("even", "odd") %> small">
+    <td><%=h l.publisher %></td>
+    <td><%=h l.application %></td>
+    <td><%=h l.version %></td>
+    <td><%=h l.os %></td>
+    <td><%=h l.number_of_licenses %></td>
+    <td><%=h l.number_installed %></td>
+    <td><%= info(l) %></td>
+    <td><%= link_to 'Edit', edit_license_path(l) %></td>
+    <td>Del</td>
+  </tr>
+<% end %>
+</table>
+</div>

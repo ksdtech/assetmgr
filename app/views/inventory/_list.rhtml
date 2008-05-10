@@ -1,0 +1,41 @@
+<!-- # http://dev.nozav.org/rails_ajax_table.html -->
+<div id="results_count">
+<table width="100%">
+	<tr>
+		<td width="85%" align="left" valign="top"><%= @assets.total_entries %> records found<br/>
+<% if @assets.page_count > 1 %>
+<%= will_paginate @assets %>
+<% else %>
+Page 1 of 1
+<% end %></td>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+</div>
+<div id="results_table">
+<table width="100%">
+	<tr>
+		<td width="4%">Info</td>
+		<td width="8%"  <%= sort_td_class_helper 'barcode' %> ><%= sort_link_helper "Barcode", "barcode" %></td>
+		<td width="12%" <%= sort_td_class_helper 'serial' %> ><%= sort_link_helper "Serial #", "serial" %></td>
+		<td width="12%" <%= sort_td_class_helper 'make' %> ><%= sort_link_helper "Make", "make" %></td>
+		<td width="12%" <%= sort_td_class_helper 'model' %> ><%= sort_link_helper "Model", "model" %></td>
+		<td width="12%" <%= sort_td_class_helper 'site' %> ><%= sort_link_helper "Site", "site" %></td>
+		<td width="12%" <%= sort_td_class_helper 'room' %> ><%= sort_link_helper "Room", "room" %></td>
+		<td width="12%" <%= sort_td_class_helper 'date' %> ><%= sort_link_helper "Date", "date" %></td>
+	</tr>
+<% for a in @assets %>
+	<tr class="<%= cycle("even", "odd") %> small">
+		<td><%= link_to 'Info', inventory_item_path(a) %></td>
+		<td><%= link_to_asset_on(a, :barcode, :barcode) %></td>
+		<td><%= link_to_asset_on(a, :serial_number, :serialnum) %></td>
+		<td><%=h a.make %></td>
+		<td><%=h a.model %></td>
+		<td><%=h a.sitename.split.first %></td>
+		<td><%=h a.room_no %></td>
+		<td><%=h a.acqdate %></td>
+	</tr>
+<% end %>
+</table>
+</div>
+

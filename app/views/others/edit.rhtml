@@ -1,0 +1,7 @@
+<div id="edit">
+	<%= error_messages_for :asset %>
+	<% form_for(:asset, :url => other_path(@asset), :html => { :method => :put }) do |f| %>
+	<%= render :partial => 'form', :locals => { :f => f } %>
+	<% end %>
+</div>
+

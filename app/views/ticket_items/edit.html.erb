@@ -1,0 +1,27 @@
+<h1>Editing ticket_item</h1>
+
+<%= error_messages_for :ticket_item %>
+
+<% form_for(@ticket_item) do |f| %>
+  <p>
+    <b>Ticket</b><br />
+    <%= f.text_field :ticket_id %>
+  </p>
+
+  <p>
+    <b>Response</b><br />
+    <%= f.text_area :response %>
+  </p>
+
+  <p>
+    <b>Minutes spent</b><br />
+    <%= f.text_field :minutes_spent %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @ticket_item %> |
+<%= link_to 'Back', ticket_items_path %>

@@ -1,0 +1,428 @@
+iMac: 
+    description: iMac (Revision A + B); iMac (Revision C); iMac (Revision D)
+    tag_list: desktop
+    released: 1998-05-06
+    discontinued: 1999-10-05
+    everymac:
+      - http://www.everymac.com/systems/apple/imac/stats/imac_ab.html
+      - http://www.everymac.com/systems/apple/imac/stats/imac_266.html
+      - http://www.everymac.com/systems/apple/imac/stats/imac_333.html
+iMac4,1: 
+    description: iMac (Intel Core Duo, Early 2006)
+    tag_list: desktop
+    released: 2006-01-10
+    discontinued: 2006-09-10
+    everymac:
+      - http://www.everymac.com/systems/apple/imac/stats/imac_cd_1.83_17.html
+      - http://www.everymac.com/systems/apple/imac/stats/imac_cd_2.0_20.html
+iMac4,2:
+    description: iMac (Intel Core Duo, Integrated Graphics)
+    tag_list: desktop
+    released: 2006-07-05
+    discontinued: 2006-09-06
+    everymac:
+      - http://www.everymac.com/systems/apple/imac/stats/imac_cd_1.83_17_ig.html
+iMac5,1:
+    description: iMac (Intel Core 2 Duo, Late  2006)
+    tag_list: desktop
+    released: 2006-09-06
+    discontinued: 
+    everymac:
+      - http://www.everymac.com/systems/apple/imac/stats/imac-core-2-duo-2.0-17-inch-specs.html
+      - http://www.everymac.com/systems/apple/imac/stats/imac-core-2-duo-2.16-20-inch-specs.html
+      - http://www.everymac.com/systems/apple/imac/stats/imac-core-2-duo-2.16-24-inch-specs.html
+iMac5,2:
+    description: iMac (Intel Core 2 Duo, Integrated Graphics)
+    tag_list: desktop
+    released: 2006-09-06
+    discontinued:
+    everymac:
+      - http://www.everymac.com/systems/apple/imac/stats/imac-core-2-duo-1.83-17-inch-specs.html
+Macmini1,1:
+    description: Mac mini (Early 2006)
+    tag_list: desktop, cpuonly
+    released: 2006-02-28
+    discontinued: 2006-09-06
+    everymac:
+        - http://www.everymac.com/systems/apple/mac_mini/stats/mac_mini_cs_1.5.html
+MacPro1,1:
+    description: Mac Pro
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac1,1:
+    description: Power Macintosh G3 (Blue & White)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac1,2:
+    description: Power Macintosh G4 (PCI-Graphics)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac2,1:
+    description: iMac (Slot-Loading CD-ROM)
+    tag_list: desktop
+    released: 1999-10-05
+    discontinued: 2000-07-19
+    everymac: 
+        - http://www.everymac.com/systems/apple/imac/stats/imac_350.html
+PowerMac2,2:
+    description: iMac 350 (Summer 2000)
+    tag_list: desktop
+    released: 2000-07-19
+    discontinued: 2001-02-22
+    everymac:
+      - http://www.everymac.com/systems/apple/imac/stats/imac_350_indigo.html
+      - http://www.everymac.com/systems/apple/imac/stats/imac_dv_400_indigo.html
+PowerMac3,1:
+    description: Power Macintosh G4 (AGP Graphics)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac3,2:
+    description: Power Macintosh G4 (AGP Graphics)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac3,3:
+    description: Power Macintosh G4 (Gigabit Ethernet)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac3,4:
+    description: Power Macintosh G4 (Digital Audio)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac3,5:
+    description: Power Macintosh G4 (Quick Silver); Power Macintosh G4 (Quick Silver, 2002)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac3,6:
+    description: Power Macintosh G4 (Mirrored Drive Doors); Power Macintosh G4 (FW 800); Power Macintosh G4 (Mirrored Drive Doors, 2003)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac4,1:
+    description: iMac (Early 2001); iMac (Summer 2001)
+    tag_list: desktop, cpuonly
+    released: 2001-02-22
+    discontinued: 2003-03-18
+    everymac:
+        - http://www.everymac.com/systems/apple/imac/stats/imac_400_indigo.html
+PowerMac4,2:
+    description: iMac (Flat-Panel)
+    tag_list: desktop
+    released: 2002-01-07
+    discontinued: 2003-02-04
+    everymac:
+        - http://www.everymac.com/systems/apple/imac/stats/imac_700_fp.html
+PowerMac4,4:
+    description: eMac; eMac (ATI Graphics); eMac (1 GHz G4)
+    tag_list: desktop
+    released: 2002-04-29
+    discontinued: 2004-04-13
+    everymac:
+        - http://www.everymac.com/systems/apple/emac/stats/emac_700.html
+        - http://www.everymac.com/systems/apple/emac/stats/emac_800.html
+        - http://www.everymac.com/systems/apple/emac/stats/emac_800_ati.html
+        - http://www.everymac.com/systems/apple/emac/stats/emac_1.0.html
+PowerMac4,5:
+    description: iMac (17-inch Flat-Panel); iMac (17-inch 1 GHz)
+    tag_list: desktop
+    released: 2002-07-17
+    discontinued: 2003-09-08
+    everymac:
+        - http://www.everymac.com/systems/apple/imac/stats/imac_800_17_fp.html
+        - http://www.everymac.com/systems/apple/imac/stats/imac_1.0_17_fp.html
+PowerMac5,1:
+    description: Power Macintosh G4 Cube; Power Macintosh G4 Cube (Early 2001)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac6,1:
+    description: iMac (USB 2.0)
+    tag_list: desktop
+    released: 2003-09-08
+    discontinued: 2004-07-01
+    everymac:
+        - http://www.everymac.com/systems/apple/imac/stats/imac_1.0_15_fp.html
+PowerMac6,3:
+    description: iMac (20-inch Flat-Panel)
+    tag_list: desktop
+    released: 2003-11-18
+    discontinued: 2004-07-01
+    everymac:
+        - http://www.everymac.com/systems/apple/imac/stats/imac_1.25_20_fp.html
+PowerMac6,4:
+    description: eMac (USB 2.0); eMac (2005)
+    tag_list: desktop
+    released: 2004-04-13
+    discontinued: 2005-10-12
+    everymac:
+        - http://www.everymac.com/systems/apple/emac/stats/emac_1.25.html
+        - http://www.everymac.com/systems/apple/emac/stats/emac_1.42.html
+PowerMac7,2:
+    description: Power Macintosh G5; Power Macintosh G5 (Dual 2.0/2.3 GHz, Early 2005)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac7,3:
+    description: Power Macintosh G5 (June 2004); Power Macintosh G5 (Dual 2.7 GHz, Early 2005)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac8,1:
+    description: iMac G5
+    tag_list: desktop
+    released: 2004-08-31
+    discontinued: 2005-05-03
+    everymac:
+        - http://www.everymac.com/systems/apple/imac/stats/imac_g5_1.6_17.html
+PowerMac8,2:
+    description: iMac G5 (Ambient Light Sensor)
+    tag_list: desktop
+    released: 2005-05-03
+    discontinued: 2005-08-12
+    everymac:
+        - http://www.everymac.com/systems/apple/imac/stats/imac_g5_1.8_17_als.html
+        - http://www.everymac.com/systems/apple/imac/stats/imac_g5_2.0_17.html
+        - http://www.everymac.com/systems/apple/imac/stats/imac_g5_2.0_20.html
+PowerMac9,1:
+    description: Power Macintosh G5 (Late 2004)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac10,1:
+    description: Mac mini
+    tag_list: desktop, cpuonly
+    released: 2005-01-11
+    discontinued: 2006-02-28
+    everymac:
+        - http://www.everymac.com/systems/apple/mac_mini/stats/mac_mini_g4_1.25.html
+        - http://www.everymac.com/systems/apple/mac_mini/stats/mac_mini_g4_1.42.html
+PowerMac10,2:
+    description: Mac mini (Late 2005)
+    tag_list: desktop, cpuonly
+    released: 2005-09-27
+    discontinued: 2006-02-28
+    everymac:
+        - http://www.everymac.com/systems/apple/mac_mini/stats/mac_mini_g4_1.5.html
+PowerMac11,2:
+    description: Power Macintosh G5 (Late 2005)
+    tag_list: desktop, cpuonly
+    released: 
+    discontinued: 
+PowerMac12,1:
+    description: iMac G5 (iSight)
+    tag_list: desktop
+    released: 2005-08-12
+    discontinued: 2006-01-10
+    everymac:
+        - http://www.everymac.com/systems/apple/imac/stats/imac_g5_1.9_17.html
+        - http://www.everymac.com/systems/apple/imac/stats/imac_g5_2.1_20.html
+ADP2,1:
+    description: Developer Transition Kit (Pentium 4 Power Macintosh, 2005)
+    tag_list: desktop, cpuonly
+    released: 2005-06-01
+    discontinued: 2006-01-10
+RackMac1,1:
+    description: Xserve
+    tag_list: server
+    released: 2002-05-14
+    discontinued: 2003-02-10
+    everymac:
+        - http://www.everymac.com/systems/apple/xserve/stats/xserve_g4_1ghz.html
+        - http://www.everymac.com/systems/apple/xserve/stats/xserve_g4_1ghz_dp.html
+RackMac1,2:
+    description: Xserve (Slot-loading); Xserve (Cluster Node)
+    tag_list: server
+    released: 2003-02-10
+    discontinued: 2004-01-06
+    everymac:
+        - http://www.everymac.com/systems/apple/xserve/stats/xserve_g4_1.33.html
+RackMac3,1:
+    description: Xserve G5; Xserve G5 (Cluster Node); Xserve G5 (January 2005); Xserve G5 (Cluster Node, January 2005)
+    tag_list: server
+    released: 2006-01-06
+    discontinued: 2006-08-07
+    everymac:
+        - http://www.everymac.com/systems/apple/xserve/stats/xserve_g5_2.0.html
+        - http://www.everymac.com/systems/apple/xserve/stats/xserve_g5_2.3_dp.html
+Xserve1,1:
+    description: Intel Xserve (Late 2006)
+    tag_list: server
+    released: 2006-08-07
+    discontinued: 
+    everymac:
+        - http://www.everymac.com/systems/apple/xserve/stats/xserve-intel-xeon-2.0-quad-specs.html
+MacBook1,1:
+    description: MacBook (Early 2006)
+    tag_list: laptop
+    released: 
+    discontinued: 
+MacBookPro1,1:
+    description: MacBook Pro (Early 2006)
+    tag_list: laptop
+    released: 
+    discontinued: 
+MacBookPro1,2:
+    description: MacBook Pro (Early 2006/17-inch)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook1,1:
+    description: PowerBook G3 (13-inch); PowerBook G3 (12-inch); PowerBook G3 (14-inch, Rev. A); PowerBook G3 (14-inch, Rev. B); PowerBook G3 (Bronze Keyboard)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook2,1:
+    description: iBook
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook2,2:
+    description: iBook (FireWire)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook3,1:
+    description: PowerBook G3 (FireWire)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook3,2:
+    description: PowerBook G4
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook3,3:
+    description: PowerBook G4 (Gigabit Ethernet)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook3,4:
+    description: PowerBook G4 (DVI)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook3,5:
+    description: PowerBook G4 (1 GHz/867 MHz)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook4,1:
+    description: iBook (Dual USB); iBook (Late 2001)
+    tag_list: laptop
+    released: 2001-05-01
+    discontinued: 2002-05-20
+    everymac:
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_500.html
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_600.html
+PowerBook4,2:
+    description: iBook (16 VRAM)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook4,3:
+    description: iBook (Opaque 16 VRAM); iBook (32 VRAM); iBook (Early 2003)
+    tag_list: laptop
+    released: 2003-04-22
+    discontinued: 2003-10-22
+    everymac:
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_900_14.html
+PowerBook5,1:
+    description: PowerBook G4 (17-inch)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook5,2:
+    description: PowerBook G4 (15-inch FW 800)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook5,3:
+    description: PowerBook G4 (17-inch 1.33 GHz)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook5,4:
+    description: PowerBook G4 (15-inch 1.5/1.33 GHz)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook5,5:
+    description: PowerBook G4 (17-inch 1.5 GHz)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook5,6:
+    description: PowerBook G4 (15-inch 1.67/1.5 GHz)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook5,7:
+    description: PowerBook G4 (17-inch 1.67 GHz)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook5,8:
+    description: PowerBook G4 (Double-Layer SD, 15-inch)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook5,9:
+    description: PowerBook G4 (Double-Layer SD, 17-inch)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook6,1:
+    description: PowerBook G4 (12-inch)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook6,2:
+    description: PowerBook G4 (12-inch DVI)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook6,3:
+    description: iBook G4
+    tag_list: laptop
+    released: 2003-10-22
+    discontinued: 2004-04-19
+    everymac:
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_g4_800_12.html
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_g4_933_14.html
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_g4_1.0_14.html
+PowerBook6,4:
+    description: PowerBook G4 (12-inch 1.33 GHz)
+    tag_list: laptop
+    released: 
+    discontinued: 
+PowerBook6,5:
+    description: iBook G4 (Early 2004); iBook G4 (Late 2004)
+    tag_list: laptop
+    released: 2004-04-19
+    discontinued: 2005-07-26
+    everymac:
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_g4_1.0_12.html
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_g4_1.0_14_2.html
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_g4_1.2_14.html
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_g4_1.2_12.html
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_g4_1.33_14.html
+PowerBook6,7:
+    description: iBook G4 (Mid 2005)
+    tag_list: laptop
+    released: 2005-07-26
+    discontinued: 2006-05-16
+    everymac:
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_g4_1.33_12.html
+        - http://www.everymac.com/systems/apple/ibook/stats/ibook_g4_1.42_14.html
+PowerBook6,8:
+    description: PowerBook G4 (12-inch 1.5 GHz)
+    tag_list: laptop
+    released: 
+    discontinued: 

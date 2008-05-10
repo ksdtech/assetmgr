@@ -1,0 +1,19 @@
+xml.instruct!
+xml.plist(:version => '1.0') {
+  xml.dict {
+    xml.key 'debug'
+    xml.true
+    xml.key 'machine_settings'
+    xml.dict {
+      xml.key 'Authorized'
+      xml.false
+    }
+    xml.key 'parameters'
+    xml.dict
+    xml.key 'configurations'
+    xml.dict
+    xml.key 'tools'
+    xml.array
+  }
+}
+

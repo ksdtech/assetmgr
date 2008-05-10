@@ -1,0 +1,18 @@
+<p>
+  <b>Ticket:</b>
+  <%=h @ticket_item.ticket_id %>
+</p>
+
+<p>
+  <b>Response:</b>
+  <%=h @ticket_item.response %>
+</p>
+
+<p>
+  <b>Minutes spent:</b>
+  <%=h @ticket_item.minutes_spent %>
+</p>
+
+
+<%= link_to 'Edit', edit_ticket_item_path(@ticket_item) %> |
+<%= link_to 'Back', ticket_items_path %>
