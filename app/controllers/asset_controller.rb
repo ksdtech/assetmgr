@@ -3,6 +3,10 @@ class AssetController < ApplicationController
   before_filter :set_classes
   ACTIVE_PARAMS = [:query, :loc, :status]
   
+  def action
+    redirect_to(:action => 'index')
+  end
+  
   protected
   
   def set_classes

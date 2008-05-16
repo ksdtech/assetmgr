@@ -18,11 +18,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :sites
   map.resources :ticket_categories
 
-  map.resources :computers, :member => { :update_from_ard => :post }
-  map.resources :printers
-  map.resources :wireless,  :singular => 'wireless_item'
-  map.resources :network,   :singular => 'network_item'
-  map.resources :others
+  map.resources :computers, :member => { :update_from_ard => :post }, :collection => { :action => :post }
+  map.resources :printers, :collection => { :action => :post }
+  map.resources :wireless,  :singular => 'wireless_item', :collection => { :action => :post }
+  map.resources :network,   :singular => 'network_item', :collection => { :action => :post }
+  map.resources :others, :collection => { :action => :post }
+  
   map.resources :ethers, :name_prefix => 'asset_', :path_prefix => '/assets/:asset_id'
   
   map.resources :tickets

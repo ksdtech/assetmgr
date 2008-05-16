@@ -1,0 +1,7 @@
+<p><%= link_to 'Check all', '#', :id => 'asset_check_all', :onclick =>
+"check_all('asset_form')" %>, 
+<%= link_to 'Clear all', '#', :id => 'asset_clear_all', :onclick =>
+"clear_all('asset_form')" %></p>
+<p>With selected items: <br/>
+  <input type="submit" name="add_to_group" value="Add to Machine Group:" />
+  <select name="machine_group"><%= machine_group_options %></select></p>
