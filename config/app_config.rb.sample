@@ -1,7 +1,7 @@
 APP_CONFIG = {
   :server         => 'http://server.example.com:3000',
   :site_title     => 'Asset Management System',
-  :session_secret => 'averylongstringthatwillbeusedtoencryptsessioninformation'
+  :session_secret => 'averylongstringthatwillbeusedtoencryptsessioninformation',
   :mail_server    => 'smtp.example.com',
   :mail_port      => 25,
   :mail_domain    => 'example.com',
