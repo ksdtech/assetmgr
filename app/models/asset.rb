@@ -198,8 +198,12 @@ class Asset < ActiveRecord::Base
     def per_page
       30 
     end
+    
+    def find_options(tag)
+      tag.blank? ? { } : tagged_find_options
+    end
 
-    def find_options
+    def tagged_find_options
       { :joins => "INNER JOIN taggings ON taggings.taggable_id=assets.id INNER JOIN tags ON tags.id=taggings.tag_id",
         :conditions => "taggings.taggable_type='Asset'" }
     end

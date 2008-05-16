@@ -22,7 +22,7 @@ module ApplicationHelper
     opts = [ [ 'Select asset...', 0 ], [ 'Remove asset link', -1 ] ]
     if !query.blank?
       page_params = { :page => 1, :query => query }
-      assets = Asset.paginated_collection(Asset.per_page, page_params, Asset.search_rules, Asset.find_options)
+      assets = Asset.paginated_collection(Asset.per_page, page_params, Asset.search_rules, Asset.find_options(params[:tag]))
       assets.each { |a| opts.push( [ a.option_text, a.id ] ) }
     end
     options_for_select(opts, sel)

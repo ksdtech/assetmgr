@@ -13,7 +13,7 @@ class OthersController < AssetController
   def index
     @content_title = @title = 'Search for other assets'
     @asset_params = params.dup
-    @assets = OtherAsset.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options)
+    @assets = OtherAsset.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options(params[:tag]))
     asset_index
   end
   

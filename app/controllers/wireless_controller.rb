@@ -13,7 +13,7 @@ class WirelessController < AssetController
   def index
     @content_title = @title = 'Search for Wireless Devices'
     @asset_params = params.dup
-    @assets = WirelessDevice.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options)
+    @assets = WirelessDevice.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options(params[:tag]))
     asset_index
   end
 

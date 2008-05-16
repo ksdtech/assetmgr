@@ -13,7 +13,7 @@ class NetworkController < AssetController
   def index
     @content_title = @title = 'Search for Network Devices'
     @asset_params = params.dup
-    @assets = NetDevice.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options)
+    @assets = NetDevice.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options(params[:tag]))
     asset_index
   end
 
