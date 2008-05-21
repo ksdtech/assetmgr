@@ -3,9 +3,8 @@ class LicensesController < ApplicationController
   # GET /licenses.xml
   def index
     @content_title = @title = 'Search for Software Licenses'
-    @licenses = WillPaginate::Collection.create(params[:page] || 1, 20, SoftwareLicense.count()) do |pager|
-      pager.replace(SoftwareLicense.find(:all, { :order => 'application, version', :offset => pager.offset, :limit => pager.per_page }))
-    end
+    @licenses = SoftwareLicense.paginated_collection(SoftwareLicense.per_page, 
+      params, SoftwareLicense.search_rules, SoftwareLicense.find_options(params[:tag]))
   end
 
   # GET /licenses/1

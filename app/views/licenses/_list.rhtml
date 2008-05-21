@@ -1,28 +1,41 @@
+<div id="results_count">
+<table width="100%">
+<tr><td width="85%" align="left" valign="top"><%= @licenses.total_entries %> records found<br/>
+  <% if @licenses.page_count > 1 -%>
+  <%= will_paginate @licenses %>
+  <% else -%>
+  Page 1 of 1
+  <% end -%></td>
+<td width="15%" align="right" valign="top"><% form_tag(new_license_path, :method => :get) do %><%= submit_tag "Add New Record" %><% end %></td></tr>
+  </table>
+</div>
 <div id="results_table">
 <table width="100%">
-  <tr>
-    <td>Vendor</td>
-    <td>Application</td>
-    <td>Ver</td>
-    <td>OS</td>
-    <td>Lic</td>
-    <td>Inst</td>
-    <td>Serial/Key/Notes</td>
-    <td>Edit</td>
-    <td>Del</td>
-  </tr>
+<tr>
+  <td <%= sort_td_class_helper 'id' %> ><%= sort_link_helper "ID", "id" %></td>
+  <td <%= sort_td_class_helper 'vendor' %> ><%= sort_link_helper "Vendor", "vendor" %></td>
+  <td <%= sort_td_class_helper 'name' %> ><%= sort_link_helper "Application", "name" %></td>
+  <td <%= sort_td_class_helper 'version' %> ><%= sort_link_helper "Version", "version" %></td>
+  <td <%= sort_td_class_helper 'os' %> ><%= sort_link_helper "OS", "os" %></td>
+  <td>Lic</td>
+  <td>Inst</td>
+  <td <%= sort_td_class_helper 'serial' %> ><%= sort_link_helper "Serial/Key/Notes", "serial" %></td>
+  <td>Edit</td>
+  <td>Del</td>
+</tr>
 <% for l in @licenses %>
-  <tr class="<%= cycle("even", "odd") %> small">
-    <td><%=h l.publisher %></td>
-    <td><%=h l.application %></td>
-    <td><%=h l.version %></td>
-    <td><%=h l.os %></td>
-    <td><%=h l.number_of_licenses %></td>
-    <td><%=h l.number_installed %></td>
-    <td><%= info(l) %></td>
-    <td><%= link_to 'Edit', edit_license_path(l) %></td>
-    <td>Del</td>
-  </tr>
+<tr class="<%= cycle("even", "odd") %> small">
+  <td><%=h l.id %></td>
+  <td><%=h l.publisher %></td>
+  <td><%=h l.application %></td>
+  <td><%=h l.version %></td>
+  <td><%=h l.os %></td>
+  <td><%=h l.number_of_licenses %></td>
+  <td><%=h l.number_installed %></td>
+  <td><%= info(l) %></td>
+  <td><%= link_to 'Edit', edit_license_path(l) %></td>
+  <td>Del</td>
+</tr>
 <% end %>
 </table>
 </div>
