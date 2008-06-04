@@ -50,8 +50,16 @@ class ComputersController < AssetController
   def index
     @content_title = @title = 'Search for Computers'
     @asset_params = params.delete_if { |k, v| k == :commit }
-    @assets = Computer.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options(params[:tag]))
-    asset_index
+    respond_to do |format|
+      format.html do
+        @assets = Computer.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options(params[:tag]))
+        asset_index
+      end
+      format.text do
+        @assets = Computer.find_queried(:all, params, Asset.search_rules, Asset.find_options(params[:tag]))
+        asset_index
+      end
+    end
   end
 
   # GET /computers/1

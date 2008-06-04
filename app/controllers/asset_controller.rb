@@ -18,9 +18,10 @@ class AssetController < ApplicationController
       format.html { render :template => 'assets/index.rhtml' }
       format.xml  { render :xml => @assets.to_xml }
       format.js   { render :template => 'assets/index.rjs' }
+      format.text  { render :template => 'assets/index.text.erb' }
     end
   end
-
+  
   def asset_show
     respond_to do |format|
       format.html { render :action => 'edit' }

@@ -1,0 +1,4 @@
+<%= "id\tname\tbarcode\tserial\tmodel\tmac\tip\tstatus\tuser\tlocation" %>
+<% for a in @assets -%>
+<%= "#{a.id}\t#{a.name}\t#{a.barcode}\t#{a.serial_number}\t#{a.description_or_model}\t#{a.mac_address}\t#{a.ip_address}\t#{a.status}\t#{a.user}\t#{a.location}" %>
+<% end -%>
