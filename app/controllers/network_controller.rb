@@ -13,8 +13,16 @@ class NetworkController < AssetController
   def index
     @content_title = @title = 'Search for Network Devices'
     @asset_params = params.dup
-    @assets = NetDevice.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options(params[:tag]))
-    asset_index
+    respond_to do |format|
+      format.html do 
+        @assets = NetDevice.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options(params[:tag]))
+        render :template => 'assets/index.rhtml'
+      end
+      format.text do 
+        @assets = NetDevice.find_queried(:all, params, Asset.search_rules, Asset.find_options(params[:tag]))
+        render :template => 'assets/index.text.erb'
+      end
+    end
   end
 
   # GET /network/1

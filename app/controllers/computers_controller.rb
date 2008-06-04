@@ -51,13 +51,13 @@ class ComputersController < AssetController
     @content_title = @title = 'Search for Computers'
     @asset_params = params.delete_if { |k, v| k == :commit }
     respond_to do |format|
-      format.html do
+      format.html do 
         @assets = Computer.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options(params[:tag]))
-        asset_index
+        render :template => 'assets/index.rhtml'
       end
-      format.text do
+      format.text do 
         @assets = Computer.find_queried(:all, params, Asset.search_rules, Asset.find_options(params[:tag]))
-        asset_index
+        render :template => 'assets/index.text.erb'
       end
     end
   end

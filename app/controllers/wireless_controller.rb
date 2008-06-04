@@ -13,8 +13,16 @@ class WirelessController < AssetController
   def index
     @content_title = @title = 'Search for Wireless Devices'
     @asset_params = params.dup
-    @assets = WirelessDevice.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options(params[:tag]))
-    asset_index
+    respond_to do |format|
+      format.html do 
+        @assets = WirelessDevice.paginated_collection(Asset.per_page, params, Asset.search_rules, Asset.find_options(params[:tag]))
+        render :template => 'assets/index.rhtml'
+      end
+      format.text do 
+        @assets = WirelessDevice.find_queried(:all, params, Asset.search_rules, Asset.find_options(params[:tag]))
+        render :template => 'assets/index.text.erb'
+      end
+    end
   end
 
   # GET /wireless/1
