@@ -224,7 +224,8 @@ class Asset < ActiveRecord::Base
           'location' => 'assets.location' },
         :rsort    => nil,                 # rsort is allowed according to rules in :sort (key as a flag)
         :patterns => { 
-          :status   => 'assets.status',
+          :status   => {
+            :conditions => 'assets.status LIKE :status', :converter => lambda { |val| val } },
           :loc      => 'assets.location',
           :tag      => {
             :conditions => 'tags.name LIKE :tag', :converter => lambda { |val| val } },
