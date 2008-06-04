@@ -1,5 +1,5 @@
 <!-- # http://dev.nozav.org/rails_ajax_table.html -->
-<%= link_to "Export", send("formatted_#{@coll_name}_path", "text") %>
+<%= link_to("Export", send("formatted_#{@coll_name}_path", "text", (@asset_params || {}).delete_if { |k,v| ["action", "controller", "commit"].include?(k.to_s) })) %>
 <div id="results_count">
 <table width="100%">
 	<tr>
