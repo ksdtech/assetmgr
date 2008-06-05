@@ -17,3 +17,25 @@ production:
   adapter: sqlite3
   database: db/production.sqlite3
   timeout: 5000
+
+# Apple Remote Desktop 3 running postgresql on port 5433 with daemon:
+#   /System/Library/CoreServices/RemoteManagement/rmdb.bundle/bin/postmaster \
+#     -D /var/db/RemoteManagement/RMDB/rmdb.data
+# The username and password are stored in
+#   /private/var/db/RemoteManagement/RMDB/passwd.txt
+# To enable IP access to specific hosts, modify 2 config files on ARD server.
+# In /var/db/RemoteManagement/RMDB/rmdb.data/postgresql.conf:
+#   tcpip_socket = true
+# In /var/db/RemoteManagement/RMDB/rmdb.data/pg_hba.conf:
+#   host ard ard 10.0.0.0 255.0.0.0 password
+# Test with psql command line tool:
+#   /System/Library/CoreServices/RemoteManagement/rmdb.bundle/bin/psql \
+#     -h 127.0.0.1 -p 5433 -U ard ard
+# See http://www.postgresql.org/docs/8.1/static/app-psql.html
+ard:
+  adapter: postgresql
+  database: ard
+  username: ard
+  password: password
+  host: 127.0.0.1
+  port: 5433

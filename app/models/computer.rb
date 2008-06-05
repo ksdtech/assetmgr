@@ -186,10 +186,6 @@ class Computer < Asset
       end
     end
     
-    def ard_db
-      @@ard ||= ArdDb.new('10.4.51.52')
-    end
-    
     # note: ARD database needs to be set up with tcpip enabled and with a host line in pg_hba.conf
     def import_ard_db(attrs_to_exclude=[])
       ard_db.each do |computerid, ard_attrs, updated|
