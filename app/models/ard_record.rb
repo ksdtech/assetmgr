@@ -1,7 +1,4 @@
-
-class ArdRecord < ActiveRecord::Base
-  set_table_name :systeminformation
-  establish_connection :ard
+class ArdRecord  < ActiveRecord::Base
   
   # See http://www.cocoadev.com/index.pl?MacintoshModels
   MAC_MODELS = {
@@ -89,157 +86,24 @@ class ArdRecord < ActiveRecord::Base
     "RackMac3,1" => "Xserve G5", # 2.3 GHz
     "Xserve1,1" => "Xserve (Dual-Core Xeon)",
   }
-
-  ARD_FIELDS = [
-
-  # sytem information
-  { 'object' => 'Mac_SystemInfoElement',
-    'maxcount' => 1,
-    'is_system' => true,
-    'fields' => [
-  [ 'appletalk_name', 't', 'ComputerName' ], # bacich-b23
-  [ 'mdns_hostname', 't', 'UnixHostName' ], # bacich-b23
-  [ 'mac_address_primary', 't', 'PrimaryNetworkHardwareAddress' ], # 00:14:51:06:F3:76
-  [ 'mac_address_en0', 't', 'En0Address' ], # 00:14:51:06:F3:76
-  [ 'serial_number', 't', 'MachineSerialNumber' ], # 4H52602CS87
-  [ 'machine_model', 't', 'MachineModel' ], # PowerBook6,5
-  [ 'machine_class', 't', 'MachineClass' ], # PowerPC G4  (1.2)
-  [ 'num_processors', 'i', 'ProcessorCount' ], # 1
-  [ 'processor_type', 't', 'ProcessorType' ], # 275
-  [ 'processor_speed', 'i', 'ProcessorSpeed' ], # 1200
-  [ 'processor_speed_string', 't', 'ProcessorSpeedString' ], # 1.2 GHz
-  [ 'bus_width', 'i', 'BusDataSize' ], # 32
-  [ 'bus_speed', 'f', 'BusSpeed' ], # 133.12199401855469
-  [ 'bus_speed_string', 't', 'BusSpeedString' ], # 133 MHz
-  [ 'physical_memory_size', 'i', 'PhysicalMemorySize' ], # 524288
-  [ 'monitor_type', 't', 'MainMonitorType' ], # LCD
-  [ 'monitor_height', 'i', 'MainMonitorHeight' ], # 768
-  [ 'monitor_width', 'i', 'MainMonitorWidth' ], # 1024
-  [ 'monitor_depth', 'i', 'MainMonitorDepth' ], # 32
-  [ 'rom_version', 't', 'BootROMVersion' ], # 4.8.7f1
-  [ 'system_version', 't', 'SystemVersion' ], # 4162
-  [ 'system_version_string', 't', 'SystemVersionString' ], # Mac OS X 10.4.2 (8C46)
-  [ 'ard1_info', 't', 'ARDComputerInfo1' ], 
-  [ 'ard2_info', 't', 'ARDComputerInfo2' ],
-  [ 'ard3_info', 't', 'ARDComputerInfo3' ],
-  [ 'ard4_info', 't', 'ARDComputerInfo4' ],
-  ] },
-
-  # for each hard disk, keyed on UnixMountPoint
-  { 'object' => 'Mac_HardDriveElement',
-    'maxcount' => 4,
-    'is_system' => false,
-    'fields' => [
-  [ 'hd#_mount_point', 't', 'UnixMountPoint' ], # /dev/disk0s3
-  [ 'hd#_model', 't', 'Model' ], # FUJITSU MHT2030AT
-  [ 'hd#_total_size', 'i', 'TotalSize' ], # 29171400
-  [ 'hd#_free_space', 'i', 'FreeSpace' ], # 21614400
-  [ 'hd#_protocol', 't', 'Protocol' ], # ATA
-  [ 'hd#_removable', 'b', 'RemovableMedia' ], # false
-  [ 'hd#_boot_volume', 'b', 'IsBootVolume' ], # true
-  ] },
-
-  # for each RAM slot, keyed on SlotIdentifier
-  { 'object' => 'Mac_RAMSlotElement',
-    'maxcount' => 4,
-    'is_system' => false,
-    'fields' => [
-  [ 'ram#_id', 't', 'SlotIdentifier' ], # DIMM0/BUILT-IN
-  [ 'ram#_module_size', 't', 'MemoryModuleSize' ], # 256 MB
-  ] },
-
-  # for ethernet and airport ConfigurationType only, keyed on InterfaceName
-  { 'object' => 'Mac_NetworkInterfaceElement',
-    'maxcount' => 4,
-    'is_system' => false,
-    'fields' => [
-  [ 'if#_name', 't',  'InterfaceName' ], # en1
-  [ 'if#_primary', 'b', 'IsPrimary' ], # true
-  [ 'if#_configuration_name', 't', 'ConfigurationName' ], # AirPort, Built-in Ethernet
-  [ 'if#_configuration_type', 't', 'ConfigurationType' ], # AirPort, Ethernet
-  [ 'if#_mac_address', 't', 'HardwareAddress' ], # 00:11:24:9E:73:CC
-  [ 'if#_ip_address', 't', 'PrimaryIPAddresses' ], # 10.3.102.23
-  [ 'if#_all_ip_addresses', 't', 'AllIPAddresses' ], # 10.3.102.23
-  ] }
-
-  ]
   
-  def id
-    Digest::MD5.digest([ self.computername, self.objectname, self.propertyname, 
-      self.itemseq, self.value, self.lastupdated ].collect { |v| v.to_s }.join(''))
-  end
-  
-  def id=(new_id)
+  def model_and_class
+    "#{MAC_MODELS.fetch(self.machine_model, self.machine_model)} - #{self.machine_class}"
   end
   
   class << self
-    def all_computerids
-      find(:all, :select => "DISTINCT computerid").map(&:computerid)
-    end
-    
-    def all_machine_models
-      find(:all, :select => "DISTINCT value", :conditions => ['propertyname LIKE ?', 'MachineModel']).map(&:value)
-    end
-
-    def find_by_attribute(objectname, propertyname, value)
-      find(:all, :select => "DISTINCT computerid", 
-        :conditions => ['objectname LIKE ? AND propertyname LIKE ? AND value LIKE ?', 
-          objectname, propertyname, value]).map(&:computerid)
-    end
-    
-    def find_by_machine_model(model)
-      find_by_attribute('Mac_SystemInfoElement', 'MachineModel', model)
-    end
-    
-    def attribute(computerid, objectname, propertyname, itemseq=0)
-      r = find(:first, :select => 'value', :conditions => 
-        ['computerid=? AND objectname LIKE ? AND propertyname LIKE ? AND itemseq=?', 
-          computerid, objectname, propertyname, itemseq], :order => 'lastupdated DESC')
-      r ? r.value : nil
-    end
-    
-    def model_report
-      models = { }
-      all_computerids.each do |cid|
-        model_attrs = system_attributes(cid)
-        machine_model = model_attrs['MachineModel']
-        machine_class = model_attrs['MachineClass']
-        models[machine_model] ||= { 'count' => 0 }
-        models[machine_model][machine_class] = 1
-        models[machine_model]['count'] += 1
+    def update
+      ArdSystemInfo.all_computerids.each do |cid|
+        attrs = ArdSystemInfo.system_attributes(cid, true)
+        p attrs
+        ar = ArdRecord.find(:first, :conditions => ['computerid=?', cid])
+        if ar.nil?
+          ar = ArdRecord.create(attrs)
+        else
+          ar.update_attributes(attrs)
+        end
       end
-      models
-    end
-    
-    def system_attributes(computerid)
-      model_attrs = { }
-      updated = nil
-      find(:all, :conditions => ['computerid=? AND objectname=? AND propertyname IN (?)', 
-        computerid, 'Mac_SystemInfoElement', 
-          ['MachineModel', 'MachineClass', 'ProcessorCount', 'ProcessorSpeed', 
-          'ProcessorSpeedString', 'ComputerName', 'UnixHostName', 'MachineSerialNumber',
-          'ARDComputerInfo1', 'ARDComputerInfo2', 'ARDComputerInfo3', 'ARDComputerInfo4'] ], 
-        :order => 'objectname,itemseq,propertyname').each do |row|
-        model_attrs[row.propertyname] = row.value
-        updated ||= row.lastupdated
-      end
-      model_attrs['computerid'] = computerid
-      model_attrs['updated'] = updated
-      model_attrs
-    end
-    
-    def all_attributes(computerid)
-      ard_attrs = { }
-      updated = nil
-      find(:all, :conditions => ['computerid=?', computerid], :order => 'objectname,itemseq,propertyname').each do |row|
-        ard_attrs[row.objectname] ||= [ ]
-        ard_attrs[row.objectname][row.itemseq] ||= { }
-        ard_attrs[row.objectname][row.itemseq][row.propertyname] = row.value
-        updated ||= row.lastupdated
-      end
-      ard_attrs['computerid'] = computerid
-      ard_attrs['updated'] = updated
-      ard_attrs
     end
   end
 end
+

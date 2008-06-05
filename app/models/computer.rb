@@ -3,6 +3,20 @@ class Computer < Asset
   has_many :computer_lists, :through => :computer_list_members
   belongs_to :machine_group
   belongs_to :nr_config
+  
+  def associated_ard_record
+    return nil unless Asset.valid_mac_address?(self.mac_address)
+    @ard_record ||= ArdRecord.find_by_computerid(self.mac_address)
+  end
+  
+  def method_missing(method_name, *args)
+    if method_name.to_s =~ /^ard_(.+)$/
+      ar = associated_ard_record
+      ar.nil? ? nil : ar.send($1.to_sym, *args)
+    else
+      super
+    end
+  end
     
   def nr_machine_settings
     rend_name = self.unix_hostname
@@ -46,32 +60,37 @@ class Computer < Asset
   def apple_model
     Computer.model_info(mfr_machine_model)['description'].gsub(/;.+$/, '...')
   end 
-  
+    
   def update_from_ard(attrs_to_exclude=[:name, :serial_number], on_serial_number=false, on_ip_address=false)
-    computerid = nil
-    ard_attrs = { }
-    updated = nil
+    ar = nil
     result = false
     msg = nil
+    # TODO: new interface for Computer.update_ard_attributes
     if Asset.valid_mac_address?(mac_address)
-      computerid, ard_attrs, updated = Computer.ard_db.record_for_id(mac_address)
-      msg = "Could not find matching ARD record for MAC address #{mac_address}." if computerid.blank?
+      ar = ArdRecord.find_by_computerid(mac_address)
+      msg = "Could not find matching ARD record for MAC address #{mac_address}." if ar.nil?
     end
     if computerid.blank? && on_serial_number && Asset.valid_serial_number?(serial_number)
-      computerid, ard_attrs, updated = Computer.ard_db.record_for_serial_number(serial_number)
-      msg = "Could not find matching ARD record for serial number #{serial_number}." if computerid.blank?
+      ar = ArdRecord.find_by_serial_number(serial_number)
+      msg = "Could not find matching ARD record for serial number #{serial_number}." if ar.nil?
     end
     if computerid.blank? && on_ip_address && Asset.valid_ip_address?(ip_address)
-      computerid, ard_attrs, updated = Computer.ard_db.record_for_ip_address(ip_address)
-      msg = "Could not find matching ARD record for IP address #{ip_address}." if computerid.blank?
+      msg = "Could not find matching ARD record for IP address #{ip_address}." if ar.nil?
     end
-    if !computerid.blank?
-      attrs = Computer.get_ard_attributes(computerid, ard_attrs, updated, attrs_to_exclude)
-      result = update_attributes(attrs)
-      msg = "ARD update failed for id #{computerid}." unless result
+    if !ar.nil?
+      # TODO update the corresponding attributes; get tag list from ard
+      attrs = nil
+      tag_list = nil
+      if !attrs.nil?
+        self.update_attributes(attrs)
+      end
+      if !tag_list.nil?
+        self.append_tags(tag_list)
+      end
     end
     [result, msg]
   end
+  
   
   def add_to_machine_group(name)
     mg = MachineGroup.find_by_name(name)
@@ -185,16 +204,7 @@ class Computer < Asset
         computer.computer_lists << list
       end
     end
-    
-    # note: ARD database needs to be set up with tcpip enabled and with a host line in pg_hba.conf
-    def import_ard_db(attrs_to_exclude=[])
-      ard_db.each do |computerid, ard_attrs, updated|
-        print "computer: #{computerid}\n"
-        print "machine_model: #{ArdDb.fetch(ard_attrs, 'Mac_SystemInfoElement', 'MachineModel')}\n"
-        update_ard_attributes(computerid, ard_attrs, updated, attrs_to_exclude)
-      end
-    end
-        
+            
     # format of filemaker export record:
     # 0 barcode
     # 1 serial_number
@@ -277,59 +287,6 @@ class Computer < Asset
         else
           computer.update_attributes(attrs)
           computer.append_tags(tag_list) unless tag_list.blank?
-        end
-      end
-    end
-    
-    def get_ard_attributes(mac_address, ard_attrs, collection_time, attrs_to_exclude)
-      serial_number = ArdDb.fetch(ard_attrs, 'Mac_SystemInfoElement', 'MachineSerialNumber')
-      machine_class = ArdDb.fetch(ard_attrs, 'Mac_SystemInfoElement', 'MachineClass') || ''
-      machine_model = ArdDb.fetch(ard_attrs, 'Mac_SystemInfoElement', 'MachineModel') || 'Unknown'
-      cpu_type = machine_class.gsub(/\s+\([\.0-9]+\)\s*$/, '')
-      memory_size = ArdDb.fetch(ard_attrs, 'Mac_SystemInfoElement', 'PhysicalMemorySize') || '0'
-      memory_mb =  memory_size.to_i / 1024
-      disk_space = ArdDb.fetch(ard_attrs, 'Mac_SystemInfoElement', 'TotalHardDriveSpace') || '0.0'
-      total_disk_space_gb = disk_space.to_f / (1024.0*1024.0)
-      attrs = { :mac_address => mac_address,
-        :mfr_machine_model    => machine_model,
-        :rom_version          => ArdDb.fetch(ard_attrs, 'Mac_SystemInfoElement', 'BootROMVersion'),
-        :cpu_type             => cpu_type,
-        :cpu_speed_mhz        => ArdDb.fetch(ard_attrs, 'Mac_SystemInfoElement', 'ProcessorSpeed'),
-        :processor_count      => ArdDb.fetch(ard_attrs, 'Mac_SystemInfoElement', 'ProcessorCount'),
-        :memory_mb            => memory_mb,
-        :total_disk_space_gb  => total_disk_space_gb,
-        :default_printer_name => ArdDb.fetch(ard_attrs, 'Mac_SystemInfoElement', 'SelectedPrinterName'),
-        :ard_data_last_collected_at => collection_time }
-      optical_drive = ArdDb.fetch(ard_attrs, 'Mac_SystemInfoElement', 'OpticalDriveType')
-      attrs[:optical_drive_type] = optical_drive unless optical_drive.blank?
-      if valid_serial_number?(serial_number) && !attrs_to_exclude.include?(:serial_number)
-        attrs[:serial_number] = serial_number
-      end
-      name = ArdDb.fetch(ard_attrs, 'Mac_SystemInfoElement', 'ComputerName')
-      if !name.blank? && !attrs_to_exclude.include?(:name)
-        computer_name = standardize_name(name)
-        unix_hostname = computer_name.gsub(/\s+/, '-')
-        attrs[:name]  = name
-        attrs[:unix_hostname] = unix_hostname
-      end
-      return attrs
-    end
-      
-    def update_ard_attributes(mac_address, ard_attrs, collection_time, attrs_to_exclude)
-      attrs = get_ard_attributes(mac_address, ard_attrs, collection_time, attrs_to_exclude)
-      info = model_info(attrs[:mfr_machine_model])
-      print " model: #{info['description']}\n tags: #{info['tag_list']}\n"
-      
-      # look for match first by mac_address, then by serial number, otherwise: new record
-      computer = find_through_mac_address(mac_address)
-      computer = find_by_serial_number(serial_number) if computer.nil? && valid_serial_number?(serial_number)
-      if computer.nil?
-        computer = create(attrs)
-        computer.tag_list = info['tag_list'] unless info['tag_list'].blank?
-      else
-        computer.update_attributes(attrs)
-        if !info['tag_list'].blank?
-          computer.append_tags(info['tag_list'])
         end
       end
     end

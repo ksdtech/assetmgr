@@ -3,7 +3,6 @@ class ImportAllSources < ActiveRecord::Migration
     AssetRecord.import_csv
     Printer.import_csv
     WirelessDevice.import_csv
-    Computer.import_ard_db
     Computer.import_ard_lists
     Computer.import_laptop_csv
   end

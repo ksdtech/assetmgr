@@ -28,6 +28,10 @@ class Asset < ActiveRecord::Base
       !value.blank? && !Asset.valid_location?(value)
   end
   
+  def associated_ard_record
+    nil
+  end
+  
   def duplicate_barcode_exists?
     return false if barcode.blank?
     sql = "SELECT COUNT(*) FROM assets WHERE barcode = '#{self.barcode}' AND id <> #{self.id}"

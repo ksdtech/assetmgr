@@ -26,7 +26,7 @@
     <td><%= tickets_links(a) %></td>
     <td><input type="checkbox" id="checked_c<%= a.id %>" name="checked[c<%= a.id %>]" value="1" /></td>
     <td><%=h a.id %></td>
-    <td><%=h a.name %></td>
+    <td <%= duplicate_class_if(!a.associated_ard_record.nil?) %> ><%=h a.name %></td>
     <td <%= duplicate_class_if(a.duplicate_barcode_exists?) %> ><%= link_to_inventory_on(a, :barcode, :barcode) %></td>
     <td <%= duplicate_class_if(a.duplicate_serial_number_exists?) %> ><%= link_to_inventory_on(a, :serialnum, :serial_number) %></td>
     <td><%=h a.description_or_model %></td>

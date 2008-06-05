@@ -9,13 +9,18 @@
 	</tr>
 	<tr>
 		<td class="label"><label for="asset_name">Name:</label></td>
-		<td colspan="2" class="field"><%= f.text_field :name, :size => 20 %></td>
+		<td class="field"><%= f.text_field :name, :size => 20 %></td>
+		<td class="fieldinfo"><%=h @asset.ard_appletalk_name %></td>
+	</tr>
+	<tr>
+		<td class="label">&nbsp;</td>
+		<td colspan="2" class="field"><input type="checkbox" name="reset_bonjour" id="reset_bonjour" value="1" onclick="do_reset_bonjour();" />
+		  <label for="reset_bonjour">Reset Bonjour name</label></td>
 	</tr>
 	<tr>
 		<td class="label"><label for="asset_unix_hostname">Bonjour/UNIX Name:</label></td>
 		<td class="field"><%= f.text_field :unix_hostname, :size => 20 %></td>
-		<td><input type="checkbox" name="reset_bonjour" id="reset_bonjour" value="1" onclick="do_reset_bonjour();" />
-		  <label for="reset_bonjour">Reset Bonjour name</label></td>
+		<td class="fieldinfo"><%=h @asset.ard_mdns_hostname %></td>
 	</tr>
 	<tr>
 		<td class="label"><label for="asset_manufacturer">Make:</label></td>
@@ -24,7 +29,7 @@
 	<tr>
 		<td class="label"><label for="asset_description">Model:</label></td>
 		<td class="field"><%= f.text_field :description, :size => 20 %></td>
-		<td class="fieldinfo"><%=h @asset.apple_model %></td>
+		<td class="fieldinfo"><%=h @asset.ard_model_and_class %></td>
 	</tr>
 	<tr>
 		<td class="label"><label for="asset_item_class">Type:</label></td>
@@ -32,11 +37,13 @@
 	</tr>
 	<tr>
 		<td class="label"><label for="asset_barcode">Barcode:</label></td>
-		<td colspan="2" class="field"><%= f.text_field :barcode, :size => 12 %></td>
+		<td class="field"><%= f.text_field :barcode, :size => 12 %></td>
+		<td class="fieldinfo"><%=h @asset.ard_ard_info_1 %></td>
 	</tr>
 	<tr>
 		<td class="label"><label for="asset_serial_number">Serial #:</label></td>
-		<td colspan="2" class="field"><%= f.text_field :serial_number, :size => 20  %></td>
+		<td class="field"><%= f.text_field :serial_number, :size => 20  %></td>
+		<td class="fieldinfo"><%=h @asset.ard_ard_info_2 %></td>
 	</tr>
 	<tr>
 		<td class="label"><label for="asset_status">Status:</label></td>
@@ -45,10 +52,12 @@
 	<tr>
 		<td class="label"><label for="asset_location">Location:</label></td>
 		<td colspan="2" class="field"><%= f.text_field :location, :size => 20  %></td>
+		<td class="fieldinfo"><%=h @asset.ard_ard_info_4 %></td>
 	</tr>
 	<tr>
 		<td class="label"><label for="asset_user">User:</label></td>
-		<td colspan="2" class="field"><%= f.text_field :user, :size => 20  %></td>
+		<td class="field"><%= f.text_field :user, :size => 20  %></td>
+		<td class="fieldinfo"><%=h @asset.ard_ard_info_3 %></td>
 	</tr>
 	<tr>
 		<td class="label"><label for="asset_ip_address">IP Address:</label></td>
