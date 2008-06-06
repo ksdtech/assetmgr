@@ -156,8 +156,8 @@ class ArdSystemInfo < ActiveRecord::Base
         end
         updated ||= row.lastupdated
       end
+      model_attrs['computerid'] = computerid
       if !convert_values
-        model_attrs['computerid'] = computerid
         model_attrs['updated'] = updated
       end
       model_attrs
