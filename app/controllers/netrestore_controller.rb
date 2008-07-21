@@ -1,4 +1,4 @@
-class NetrestoreController < ApplicationController
+class NetrestoreController < ActionController::Base
   
   # GET /netrestore?hw=<mac_address>&gp=<group_name>&p=<password>
   def index
