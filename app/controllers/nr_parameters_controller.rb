@@ -24,7 +24,7 @@ class NrParametersController < ApplicationController
     @nr_parameter = NrParameter.new(params[:nr_parameter])
     if @nr_parameter.save
       flash[:notice] = 'NetRestore settings were successfully created.'
-      redirect_to :action => 'list'
+      redirect_to nr_parameters_url
     else
       render :action => 'new'
     end
@@ -38,7 +38,7 @@ class NrParametersController < ApplicationController
     @nr_parameter = NrParameter.find(params[:id])
     if @nr_parameter.update_attributes(params[:nr_parameter])
       flash[:notice] = 'NetRestore settings were successfully updated.'
-      redirect_to :action => 'show', :id => @nr_parameter
+      redirect_to nr_parameter_url
     else
       render :action => 'edit'
     end

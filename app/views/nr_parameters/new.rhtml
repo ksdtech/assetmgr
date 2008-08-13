@@ -1,6 +1,6 @@
 <h1>New NetRestore settings</h1>
 
-<% form_for(:nr_parameter, :url => nr_parameters_path) do |f| %>
+<% form_for(@nr_parameter) do |f| %>
   <%= render :partial => 'form', :locals => { :f => f } %>
   <%= submit_tag "Create" %>
 <% end %>

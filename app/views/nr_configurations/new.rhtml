@@ -1,6 +1,6 @@
 <h1>New NetRestore configuration</h1>
 
-<% form_for(:nr_configuration, :url => nr_configurations_path) do |f| %>
+<% form_for(@nr_configuration) do |f| %>
   <%= render :partial => 'form', :locals => { :f => f } %>
   <%= submit_tag "Create" %>
 <% end %>

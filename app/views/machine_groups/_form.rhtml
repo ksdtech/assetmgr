@@ -2,13 +2,13 @@
 
 <!--[form:machine_group]-->
 <p><label for="name">Group Name</label><br/>
-<%= text_field 'machine_group', 'name'  %></p>
+<%= f.text_field :name %></p>
 
 <p><label for="name">NetRestore configuration</label><br/>
-<%= select 'machine_group', 'nr_configuration_id', NrConfiguration.find(:all, :order => 'updated_at DESC').collect {|p| [ p.name, p.id ] } %></p>
+<%= f.select :nr_configuration_id, NrConfiguration.find(:all, :order => 'updated_at DESC').collect {|p| [ p.name, p.id ] } %></p>
 
 <p><label for="name">NetRestore settings</label><br/>
-<%= select 'machine_group', 'nr_parameter_id', NrParameter.find(:all, :order => 'name ASC').collect {|p| [ p.name, p.id ] } %></p>
+<%= f.select :nr_parameter_id, NrParameter.find(:all, :order => 'name ASC').collect {|p| [ p.name, p.id ] } %></p>
 
 <!--[eoform:machine_group]-->
 

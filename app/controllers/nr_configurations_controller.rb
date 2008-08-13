@@ -6,7 +6,7 @@ class NrConfigurationsController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
+         :redirect_to => nr_configurations_url
 
   def list
     @nr_configurations = NrConfiguration.paginate :per_page => 10, :page => (params[:page] || 1)
@@ -24,7 +24,7 @@ class NrConfigurationsController < ApplicationController
     @nr_configuration = NrConfiguration.new(params[:nr_configuration])
     if @nr_configuration.save
       flash[:notice] = 'NetRestore configuration was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to nr_configurations_url
     else
       render :action => 'new'
     end
@@ -38,7 +38,7 @@ class NrConfigurationsController < ApplicationController
     @nr_configuration = NrConfiguration.find(params[:id])
     if @nr_configuration.update_attributes(params[:nr_configuration])
       flash[:notice] = 'NetRestore configuration was successfully updated.'
-      redirect_to :action => 'show', :id => @nr_configuration
+      redirect_to nr_configuration_url
     else
       render :action => 'edit'
     end
@@ -46,6 +46,6 @@ class NrConfigurationsController < ApplicationController
 
   def destroy
     NrConfiguration.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to nr_configurations_url
   end
 end

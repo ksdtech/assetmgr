@@ -1,7 +1,7 @@
 <h1>Editing machine group</h1>
 
-<% form_tag :action => 'update', :id => @machine_group do %>
-<%= render :partial => 'form' %>
+<% form_for(@machine_group) do |f| %>
+<%= render :partial => 'form', :locals => { :f => f } %>
 <% if @machine_group.computers.size > 0 %>
 <h1>Computers</h1>
 <%= render :partial => 'computers', :locals => { :assets => @machine_group.computers, :edit => true } %>
