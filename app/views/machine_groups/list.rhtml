@@ -5,6 +5,7 @@
   <tr>
     <th>Name</th>
     <th>Computers</th>
+    <th>Configuration</th>
     <th colspan="2">&nbsp;</th>
   </tr>
 
@@ -12,6 +13,7 @@
   <tr>
     <td><%=h machine_group.name %></td>
     <td><%= link_to "#{machine_group.computers.size}", :action => 'show', :id => machine_group %></td>
+    <td><%=h machine_group.configuration_name %></td>
     <td><%= link_to 'Edit', :action => 'edit', :id => machine_group %></td>
     <td><%= link_to 'Destroy', { :action => 'destroy', :id => machine_group }, :confirm => 'Are you sure?', :method => :post %></td>
   </tr>
