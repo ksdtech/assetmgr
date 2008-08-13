@@ -2,27 +2,27 @@
 
 <!--[form:nr_configuration]-->
 <p><label for="nr_configuration_name">Configuration (image) name</label><br/>
-<%= text_field 'nr_configuration', 'name'  %></p>
+<%= f.text_field :name %></p>
 
 <p><label for="nr_configuration_description">Description</label><br/>
-<%= text_area 'nr_configuration', 'description', :rows => 3 %></p>
+<%= f.text_area :description, :rows => 3 %></p>
 
 <p><label for="nr_configuration_protocol">Protocol</label><br/>
-<%= select 'nr_configuration', 'protocol', NrConfiguration::PROTOCOL_OPTIONS  %></p>
+<%= f.select :protocol, NrConfiguration::PROTOCOL_OPTIONS  %></p>
 
 <p><label for="nr_configuration_host_or_volume">Host or volume</label><br/>
-<%= text_field 'nr_configuration', 'host_or_volume'  %></p>
+<%= f.text_field :host_or_volume %></p>
 
 <p><label for="nr_configuration_username">Username</label><br/>
-<%= text_field 'nr_configuration', 'username'  %></p>
+<%= f.text_field :username %></p>
 
 <p><label for="nr_configuration_password">Password</label><br/>
-<%= password_field 'nr_configuration', 'password'  %></p>
+<%= f.password_field :password %></p>
 
 <p><label for="nr_configuration_sharepoint">Sharepoint</label><br/>
-<%= text_field 'nr_configuration', 'sharepoint'  %></p>
+<%= f.text_field :sharepoint %></p>
 
 <p><label for="nr_configuration_path">Relative path within sharepoint</label><br/>
-<%= text_field 'nr_configuration', 'path'  %></p>
+<%= f.text_field :path %></p>
 <!--[eoform:nr_configuration]-->
 

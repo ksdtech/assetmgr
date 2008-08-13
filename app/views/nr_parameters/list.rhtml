@@ -1,12 +1,17 @@
 <h1>Listing NetRestore settings</h1>
 
+<% if @nr_parameters.total_pages > 1 -%>
+<%= will_paginate @nr_parameters %>
+<% else -%>
+Page 1 of 1
+<% end -%>
+
 <table>
   <tr>
     <th width="30%">Name</th>
     <th width="50%">Description</th>
     <th colspan="3">
   </tr>
-  
 <% for nr_parameter in @nr_parameters %>
   <tr>
     <td><%=h nr_parameter.name %></td>
@@ -17,10 +22,5 @@
   </tr>
 <% end %>
 </table>
-
-<%= link_to 'Previous page', { :page => @nr_parameter_pages.current.previous } if @nr_parameter_pages.current.previous %>
-<%= link_to 'Next page', { :page => @nr_parameter_pages.current.next } if @nr_parameter_pages.current.next %> 
-
 <br />
-
-<%= link_to 'New settings', :action => 'new' %>
+<%= link_to 'New settings', new_nr_parameter_path %>

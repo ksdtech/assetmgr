@@ -57,15 +57,28 @@ class TicketsController < ApplicationController
     @ticket_item = TicketItem.new
     @ticket.requestor = User.find(session[:user])
     
-    a = params[:id] ? Asset.find(params[:asset_id]) : nil
-    @content_title = @title = a.nil? ? 'Editing new ticket' : "Editing new ticket for #{a.title}"
+    a = params[:asset_id] ? Asset.find(params[:asset_id]) : nil
+    if a.nil?
+      @title = 'Editing new ticket' 
+    else
+      @ticket.asset_link = a.id
+      # new_record? check will suppress selection of asset in view
+      @title = "Editing new ticket for #{a.title}"
+    end
+    @content_title = @title
     @submit_value = 'Create'
   end
 
   # GET /tickets/1;edit
   def edit
     @ticket = Ticket.find(params[:id])
-    @content_title = @title = @ticket.asset.nil? ? "Editing ticket \# #{@ticket.id}" : "Editing ticket \# #{@ticket.id} for #{@ticket.asset.title}"
+    a = @ticket.asset
+    if a.nil?
+      @title = 'Editing ticket #{@ticket.id}' 
+    else
+      @title = "Editing ticket #{@ticket.id} for #{a.title}"
+    end
+    @content_title = @title
     @submit_value = 'Update'
   end
 
@@ -121,40 +134,4 @@ class TicketsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  protected
-  
-  def sort_order(sort_params)
-    sort = case sort_params  
-      when /^assigned/ then 'assigned ASC'
-      when /^status/   then 'status ASC'
-      when /^start/    then 'estimated_start_date ASC'
-      when /^comp/     then 'estimated_completion_date ASC'
-      else
-        # /^id/ 
-        'id ASC'
-      end
-    sort.gsub!(/ ASC/, ' DESC') if !sort_params.blank? && sort_params.match(/_r/)
-    return sort
-  end
-  
-  def filter_sort_and_paginate(asset_id=nil)
-    @items_per_page = 30
-    @select = "DISTINCT #{Ticket.table_name}.*"
-    @conditions = [ 'asset_id = ?', asset_id ] unless asset_id.nil?
-    @status = params[:status]
-    if !@status.blank?
-      if @conditions.nil?
-        @conditions = [ 'status = ?', @status ]
-      else
-        @conditions[0] << ' AND status = ?'
-        @conditions.push(@status)
-      end
-    end
-    
-    @total = Ticket.count(:conditions => @conditions, :joins => @joins)
-    return paginate(:items, :class_name => Ticket.name,
-      :select => @select, :conditions => @conditions, :joins => @joins,
-      :order => sort_order(params[:sort]), :per_page => @items_per_page)
-  end  
 end

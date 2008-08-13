@@ -1,9 +1,12 @@
+<% if !(help_staff? && (!@ticket.new_record? || @ticket.asset_link.nil?)) %>
+<input type="hidden" name="ticket[asset_link]" value="<%= @ticket.asset_link %>" />
+<% end %>
 <table width="100%">
   <tr><td colspan="3" bgcolor="#CCCCCC">Task</td></tr>
-<% if @ticket.asset.nil? %>
+<% if @ticket.asset_link.nil? %>
   <tr><td colspan="3">Not linked to any asset</td></tr>
 <% end %>
-<% if help_staff? %>
+<% if help_staff? && (!@ticket.new_record? || @ticket.asset_link.nil?) %>
   <tr><td>
     <label for="ticket_asset_query">First search assets...</label><br/>
     <%= f.text_field :asset_query, :size => 20 %></td>

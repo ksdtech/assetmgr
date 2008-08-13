@@ -2,36 +2,36 @@
 
 <!--[form:nr_parameter]-->
 <p><label for="nr_parameter_name">Settings name</label><br/>
-<%= text_field 'nr_parameter', 'name'  %></p>
+<%= f.text_field :name %></p>
 
 <p><label for="nr_parameter_description">Description</label><br/>
-<%= text_area 'nr_parameter', 'description', :rows => 3 %></p>
+<%= f.text_area :description, :rows => 3 %></p>
 
 <p><label for="nr_parameter_target_disk_name">Target disk name</label><br/>
-<%= text_field 'nr_parameter', 'target_disk_name'  %></p>
+<%= f.text_field :target_disk_name %></p>
 
-<p><%= check_box 'nr_parameter', 'fully_automate' %>
+<p><%= f.check_box :fully_automate %>
   <label for="nr_parameter_fully_automate">Enable full automation</label></p>
 
-<p><%= check_box 'nr_parameter', 'disable_own' %>
+<p><%= f.check_box :disable_own %>
   <label for="nr_parameter_disable_own">Disable ownership on source and target</label></p>
 
-<p><%= check_box 'nr_parameter', 'erase_target' %>
+<p><%= f.check_box :erase_target %>
   <label for="nr_parameter_erase_target">Erase target disk</label></p>
 
-<p><%= check_box 'nr_parameter', 'verify_restore' %>
+<p><%= f.check_box :verify_restore %>
   <label for="nr_parameter_verify_restore">Verify restored disk</label></p>
 
-<p><%= check_box 'nr_parameter', 'should_restart' %>
+<p><%= f.check_box :should_restart %>
   <label for="nr_parameter_should_restart">Restart when finished</label></p>
 
-<p><%= check_box 'nr_parameter', 'set_target_as_boot_disk' %>
+<p><%= f.check_box :set_target_as_boot_disk %>
   <label for="nr_parameter_set_target_as_boot_disk">Set target as boot disk</label></p>
 
-<p><%= check_box 'nr_parameter', 'rebuild_desktop' %>
+<p><%= f.check_box :rebuild_desktop %>
   <label for="nr_parameter_rebuild_desktop">Rebuild OS 9 Desktop</label></p>
 
 <p><label for="nr_parameter_buffers">Buffers (4 fields, separated by commas)</label><br/>
-<%= text_field 'nr_parameter', 'buffers'  %></p>
+<%= f.text_field :buffers %></p>
 <!--[eoform:nr_parameter]-->
 

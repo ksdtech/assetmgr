@@ -35,6 +35,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :inventory, :singular => 'inventory_item'
   map.resources :licenses
   map.resources :machine_groups
+  
+  map.resources :nr_configurations
+  map.resources :nr_parameters
 
   map.connect '', :controller => 'computers', :action => 'index'
   

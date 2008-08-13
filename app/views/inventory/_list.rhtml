@@ -3,7 +3,7 @@
 <table width="100%">
 	<tr>
 		<td width="85%" align="left" valign="top"><%= @assets.total_entries %> records found<br/>
-<% if @assets.page_count > 1 %>
+<% if @assets.total_pages > 1 %>
 <%= will_paginate @assets %>
 <% else %>
 Page 1 of 1

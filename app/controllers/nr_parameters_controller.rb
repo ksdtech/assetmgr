@@ -9,7 +9,7 @@ class NrParametersController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @nr_parameter_pages, @nr_parameters = paginate :nr_parameters, :per_page => 10
+    @nr_parameters = NrParameter.paginate :per_page => 10, :page => (params[:page] || 1)
   end
 
   def show

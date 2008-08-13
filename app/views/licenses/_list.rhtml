@@ -1,7 +1,7 @@
 <div id="results_count">
 <table width="100%">
 <tr><td width="85%" align="left" valign="top"><%= @licenses.total_entries %> records found<br/>
-  <% if @licenses.page_count > 1 -%>
+  <% if @licenses.total_pages > 1 -%>
   <%= will_paginate @licenses %>
   <% else -%>
   Page 1 of 1
