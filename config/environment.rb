@@ -57,6 +57,7 @@ Rails::Initializer.run do |config|
     :password => APP_CONFIG[:mail_password],
     :authentication => APP_CONFIG[:mail_auth],
   }
+
 end
 
 # Add new inflection rules using the following format 
@@ -74,3 +75,6 @@ end
 
 # Include your application configuration below
 require 'faster_csv'
+# now a gem. collection uses total_pages instead of page_count
+require 'will_paginate'
+
