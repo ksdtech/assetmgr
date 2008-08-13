@@ -63,7 +63,7 @@ class MachineGroupsController < ApplicationController
         msg += removal_errors.join(' ')
       end
       flash[:notice] = msg
-      redirect_to :action => 'show', :id => @machine_group
+      redirect_to :action => 'list'
     else
       render :action => 'edit'
     end
