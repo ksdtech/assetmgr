@@ -6,7 +6,7 @@ class NrConfigurationsController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => nr_configurations_url
+         :redirect_to => { :action => :list }
 
   def list
     @nr_configurations = NrConfiguration.paginate :per_page => 10, :page => (params[:page] || 1)
