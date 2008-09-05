@@ -1,6 +1,6 @@
 <div id="edit_new">
 	<%= error_messages_for :license %>
-	<% form_for(@license, :url => { :action => 'create' }) do |f| %>
+	<% form_for(:license, @license, license_path(@license), :html => { :method => :put, :class => "edit_license", :id => "edit_license_#{@license.id}" ) do |f| %>
 	<%= render :partial => 'form', :locals => { :f => f } %>
 	<% end %>
 </div>
