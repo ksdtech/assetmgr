@@ -7,9 +7,9 @@ class AddPrinterColumns < ActiveRecord::Migration
   end
 
   def self.down
-    drop_column :assets, :ppd_product
-    drop_column :assets, :cups_http
-    drop_column :assets, :cups_ipp
-    drop_column :assets, :cups_lpr
+    remove_column :assets, :ppd_product
+    remove_column :assets, :cups_http
+    remove_column :assets, :cups_ipp
+    remove_column :assets, :cups_lpr
   end
 end

@@ -99,7 +99,7 @@ class Printer < Asset
     end
     
     def snmp_poll
-      find(:all, :conditions => ["status='active' AND ip_address<>'' AND snmp_printmib=1"]).each do |prt|
+      find(:all, :conditions => ["status='active' AND ip_address<>'' AND snmp_printer_mib=1"]).each do |prt|
         prt.snmp_poll
       end
     end

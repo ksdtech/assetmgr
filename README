@@ -13,10 +13,11 @@ Dependencies:
   will_paginate gem for pagination in Rails 2.0
   snmp for polling printer page counts
 
-Newly added: SNMP support for daily rake tasks to pull printer page count
-information.  Will add more SNMP calls to monitor network switches.  Also
-will add support for monitoring other daily tasks, such as server
-backups.
+Newly added: SNMP support for a daily rake task to pull printer page count
+information for printer that support RFC 1759 (Printer-MIB).  
+I will probably add more SNMP calls to monitor network switches.  Also
+on the horizon is support for monitoring other periodic tasks, such as server
+processes and backup status.
 
 For information on Apple Remote Desktop's postgresql data, see:
 http://developer.apple.com/appleapplications/ardsql.html

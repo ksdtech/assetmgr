@@ -5,7 +5,7 @@ class AddNetworkLocations < ActiveRecord::Migration
   end
 
   def self.down
-    drop_column :assets, :network_location
-    drop_column :assets, :network_port
+    remove_column :assets, :network_location
+    remove_column :assets, :network_port
   end
 end
