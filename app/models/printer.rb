@@ -1,4 +1,5 @@
 class Printer < Asset
+  PRT_MARKER_LIFE_COUNT_1_1 = '1.3.6.1.2.1.43.10.2.1.4.1.1'
   
   def edit_path
     :edit_printer_path
@@ -10,6 +11,41 @@ class Printer < Asset
   
   def name_validation?
     false
+  end
+  
+  def snmp_poll
+    t = nil
+    if !ip_address.blank?
+      begin
+        admin_user = User.find(:first, :conditions => ['administrator=1'])
+        snmp_category = TicketCategory.find_or_create_by_name('_SNMP')
+        snmp = SNMP::Manager.new(:Host => self.ip_address, :Timeout => 0.5)
+        response = snmp.get([PRT_MARKER_LIFE_COUNT_1_1])
+        response.each_varbind do |vb|
+          begin
+            page_count = vb.value.to_i
+            t = tickets.build(
+              :requestor       => admin_user,
+              :ticket_category => snmp_category,
+              :priority        => Ticket::PRIORITY_LOW,
+              :importance      => Ticket::PRIORITY_LOW,
+              :status          => Ticket::STATUS_POLLED,
+              :subject         => 'Page Count',
+              :description     => 'Created by system: Printer#snmp_poll',
+              :page_count      => page_count)
+            t.save!
+            puts "printer #{self.ip_address} - created page count ticket #{t.id}"
+          rescue
+            puts "printer #{self.ip_address} - ticket failed: #{$!}"
+            t = nil
+          end
+        end
+      rescue
+        # SNMP::RequestTimeout, etc.
+        puts "printer #{self.ip_address} - snmp request failed: #{$!}"
+      end
+    end
+    t
   end
   
   class << self
@@ -59,6 +95,12 @@ class Printer < Asset
         printer.tickets.create(:description => 'Inventoried for page count',
           :status => 'ok',
           :page_count => page_count) if !page_count.nil?
+      end
+    end
+    
+    def snmp_poll
+      find(:all, :conditions => ["status='active' AND ip_address<>'' AND snmp_printmib=1"]).each do |prt|
+        prt.snmp_poll
       end
     end
   end

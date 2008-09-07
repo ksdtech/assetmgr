@@ -57,7 +57,7 @@
 		<td colspan="2" class="field"><%= f.text_field :mac_address, :size => 18 %></td>
 	</tr>
 	<tr>
-		<td class="label"><label for="print_engine">Printing engine:</label></td>
+		<td class="label"><label for="asset_print_engine_type">Printing engine:</label></td>
 		<td colspan="2" class="field"><%= f.select :print_engine_type, [ [ 'Laser', 'laser'], [ 'Inkjet', 'inkjet' ] ] %></td>
 	</tr>
 	<tr>
@@ -79,6 +79,10 @@
 	<tr>
 	  <td class="label"&nbsp;</td>
 		<td colspan="2" class="field"><%= f.check_box :cups_lpr %> Print via LPD</td>
+	</tr>
+	<tr>
+	  <td class="label"&nbsp;</td>
+		<td colspan="2" class="field"><%= f.check_box :snmp_printmib %> Supports SNMP PrintMIB</td>
 	</tr>
 	<tr>
 		<td class="label"><label for="asset_surplus_item_number">Surplus Item #:</label></td>

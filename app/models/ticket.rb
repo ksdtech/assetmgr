@@ -1,10 +1,12 @@
 class Ticket < ActiveRecord::Base
   include SearchableRecord
   
-  STATUS_OPTIONS   = ['', 'Not Started', 'In Progress', 'Completed', 'Deferred']
+  STATUS_OPTIONS   = ['', 'Not Started', 'In Progress', 'Completed', 'Deferred', 'Polled']
   PRIORITY_OPTIONS = ['', 'Low', 'Medium', 'High', 'Critical']
-  COMPLETED = 3
-  MEDIUM = 2
+  STATUS_COMPLETED = 3
+  STATUS_POLLED = 5
+  PRIORITY_LOW = 1
+  PRIORITY_MEDIUM = 2
   
   belongs_to :asset
   belongs_to :requestor, :class_name => 'User'
@@ -35,7 +37,7 @@ class Ticket < ActiveRecord::Base
   end
   
   def validate
-    if status == COMPLETED && ticket_items.count == 0
+    if status == STATUS_COMPLETED && ticket_items.count == 0
       errors.add_on_empty('response') 
       errors.add_on_empty('time_spent')
     else
@@ -67,7 +69,7 @@ class Ticket < ActiveRecord::Base
   end
   
   def send_notifications
-    if status == COMPLETED && notify_requestor.to_i == 1 && !requestor_id.nil?
+    if status == STATUS_COMPLETED && notify_requestor.to_i == 1 && !requestor_id.nil?
       u = User.find(requestor_id)
       if !u.nil? && !u.email_address.blank?
         TicketNotifier.deliver_notify_requestor_on_completion(u, self)

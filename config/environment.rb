@@ -75,6 +75,5 @@ end
 
 # Include your application configuration below
 require 'faster_csv'
-# now a gem. collection uses total_pages instead of page_count
-require 'will_paginate'
-
+require 'will_paginate' # will_paginate is now a gem
+require 'snmp' # for polling printer page counts
