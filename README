@@ -8,6 +8,16 @@ postgresql data contained in Apple Remote Desktop 2/3, and the NetRestore
 imaging system developed by Mike Bombich, which can use the xml resources
 provided by this system to select and control the network imaging process.
 
+Dependencies:
+  faster_csv gem for parsing import files
+  will_paginate gem for pagination in Rails 2.0
+  snmp for polling printer page counts
+
+Newly added: SNMP support for daily rake tasks to pull printer page count
+information.  Will add more SNMP calls to monitor network switches.  Also
+will add support for monitoring other daily tasks, such as server
+backups.
+
 For information on Apple Remote Desktop's postgresql data, see:
 http://developer.apple.com/appleapplications/ardsql.html
 
