@@ -1,6 +1,6 @@
 <div id="edit_new">
 	<%= error_messages_for :asset %>
-	<% form_for(:asset, :url => wireless_path) do |f| %>
+	<% form_for(:asset, @asset, :url => wireless_path) do |f| %>
 	<%= render :partial => 'form', :locals => { :f => f } %>
 	<% end %>
 </div>

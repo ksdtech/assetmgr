@@ -1,11 +1,10 @@
 <h1>Listing NetRestore configurations</h1>
-
-<% if @nr_configurations.total_pages > 1 -%>
-<%= will_paginate @nr_configurations %>
-<% else -%>
-Page 1 of 1
-<% end -%>
-
+<table>
+  <tr>
+    <td width="85%" align="left" valign="top"><%= @nr_configurations.size %> records found</td>
+    <td width="15%" align="right" valign="top"><% form_tag(new_nr_configuration_path, :method => :get) do %><%= submit_tag "Add New Record" %><% end %></td>
+  </tr>
+</table>
 <table>
   <tr>
     <th>Name</th>
