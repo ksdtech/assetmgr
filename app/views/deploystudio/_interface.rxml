@@ -1,0 +1,39 @@
+xml.key interface[:name]
+xml.dict {
+  xml.key 'dstudio-dns-ips'
+  xml.string interface[:dns_entries]  
+  xml.key 'dstudio-host-airport'
+  xml.string 'NO'
+  xml.key 'dstudio-host-airport-name'
+  xml.string
+  xml.key 'dstudio-host-airport-password'
+  xml.string
+  xml.key 'dstudio-host-ftp-proxy'
+  xml.string 'NO'
+  xml.key 'dstudio-host-ftp-proxy-port'
+  xml.string
+  xml.key 'dstudio-host-ftp-proxy-server'
+  xml.string
+  xml.key 'dstudio-host-http-proxy'
+  xml.string 'NO'
+  xml.key 'dstudio-host-http-proxy-port'
+  xml.string
+  xml.key 'dstudio-host-http-proxy-server'
+  xml.string
+  xml.key 'dstudio-host-https-proxy'
+  xml.string 'NO'
+  xml.key 'dstudio-host-https-proxy-port'
+  xml.string
+  xml.key 'dstudio-host-https-proxy-server'
+  xml.string
+  xml.key 'dstudio-host-interfaces'
+  xml.string interface[:name]
+  xml.key 'dstudio-host-ip'
+  xml.string interface[:ip_address]
+  xml.key 'dstudio-router-ip'
+  xml.string interface[:router_address]
+  xml.key 'dstudio-search-domains'
+  xml.string interface[:search_domain]
+  xml.key 'dstudio-subnet-mask'
+  xml.string interface[:subnet_mask]
+}

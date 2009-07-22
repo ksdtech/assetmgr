@@ -1,8 +1,32 @@
+
 class Computer < Asset
   has_many :computer_list_members, :dependent => :delete_all
   has_many :computer_lists, :through => :computer_list_members
   belongs_to :machine_group
   belongs_to :nr_config
+  
+  STANDARD_INTERFACES = [
+    [ 'en0', 'Built-in Ethernet' ],
+    [ 'en1', 'AirPort' ],
+  ]
+  
+  STANDARD_IP_SETTINGS = {
+    'kent' => {
+      :subnet_mask => '255.255.0.0',
+      :router_address => '10.4.254.254',
+      :dns_entries => '10.4.51.70 10.4.51.68',
+    },
+    'bacich' => {
+      :subnet_mask => '255.255.0.0',
+      :router_address => '10.3.254.253',
+      :dns_entries => '10.3.51.73 10.4.51.70',
+    },
+    'district' => {
+      :subnet_mask => '255.255.0.0',
+      :router_address => '10.2.254.254',
+      :dns_entries => '10.2.51.1 10.4.51.70',
+    }
+  }
   
   def associated_ard_record
     return nil unless Asset.valid_mac_address?(self.mac_address)
@@ -17,13 +41,30 @@ class Computer < Asset
       super
     end
   end
-    
-  def nr_machine_settings
+  
+  def ds_interfaces
+    @interfaces = Computer::STANDARD_INTERFACES.inject([]) do |ary, intf|
+      ds_intf = Hash.new
+      ds_intf[:name] = intf[0]
+      ds_intf[:service_name] = intf[1]
+      ds_intf[:search_domain] = 'kentfieldschools.org'
+      ds_intf[:ip_address] = ip_address
+      ip_options = Computer.get_ip_options(self.ip_address, self.network_location, self.network_port)
+      ds_intf.merge!(ip_options) if ip_options
+      ary << HashWithIndifferentAccess.new(ds_intf)
+      ary
+    end
+  end
+  
+  def rendezvous_name
     rend_name = self.unix_hostname
     rend_name = self.name.strip.downcase.gsub(/\s+/, '-') if rend_name.blank?
+  end
+    
+  def nr_machine_settings
     settings = { :computerid => self.mac_address,
       :computer_name => self.name,
-      :rendezvous_name => rend_name,
+      :rendezvous_name => self.rendevous_name,
       # :classicAtalkName => nil,
       :ard_list_tag => '',
       :default_printer => '', # self.default_printer_name,

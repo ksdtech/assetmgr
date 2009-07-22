@@ -1,0 +1,41 @@
+xml.key host.mac_address
+xml.dict {
+  xml.key 'cn'
+  xml.string host.name
+  xml.key 'dstudio-auto-disable'
+  xml.string 'NO</string>'
+  xml.key 'dstudio-auto-reset-workflow</key>'
+  xml.string 'NO'
+  xml.key 'dstudio-disabled'
+  xml.string 'NO'
+  xml.key 'dstudio-group'
+  xml.string host.machine_group.name
+  xml.key 'dstudio-host-ard-field-1'
+  xml.string host.barcode
+  xml.key 'dstudio-host-ard-field-2'
+  xml.string host.serial_number
+  xml.key 'dstudio-host-ard-field-3'
+  xml.string host.location
+  xml.key 'dstudio-host-ard-field-4'
+  xml.string host.user
+  xml.key 'dstudio-host-delete-other-locations'
+  xml.string 'YES'
+  xml.key 'dstudio-host-first-interface'
+  xml.string 'en0'
+  xml.key 'dstudio-host-location'
+  xml.string 'Automatic'
+  xml.key 'dstudio-host-new-network-location'
+  xml.string 'NO'
+  xml.key 'dstudio-hostname'
+  xml.string host.unix_hostname
+  xml.key 'dstudio-mac-addr'
+  xml.string host.mac_address
+  if !host.ds_interfaces.empty?
+    xml.key 'dstudio-host-interfaces'
+    xml.dict {
+      host.ds_interfaces.each do |ds_intf|
+        xml << render(:partial => 'interface', :locals => { :interface => ds_intf } )
+      end
+    }
+  end
+}

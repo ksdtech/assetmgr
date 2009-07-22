@@ -1,0 +1,6 @@
+xml.instruct!
+xml.plist(:version => '1.0') {
+  xml.dict {
+    xml << render(:partial => 'host', :collection => @hosts)
+  }
+}
