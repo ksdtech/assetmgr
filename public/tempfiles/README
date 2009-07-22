@@ -1,0 +1,3 @@
+public/tempfiles
+
+This directory must be writable by the rails application.  Tempfiles will be created here for download.
