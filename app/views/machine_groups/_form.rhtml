@@ -4,6 +4,9 @@
 <p><label for="name">Group Name</label><br/>
 <%= f.text_field :name %></p>
 
+<p><label for="name">Architecture</label><br/>
+<%= f.select :architecture, ['i386', 'ppc'] %></p>
+
 <p><label for="name">NetRestore configuration</label><br/>
 <%= f.select :nr_configuration_id, NrConfiguration.find(:all, :order => 'updated_at DESC').collect {|p| [ p.name, p.id ] } %></p>
 

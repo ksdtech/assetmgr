@@ -44,14 +44,23 @@ class Computer < Asset
   
   def ds_interfaces
     @interfaces = Computer::STANDARD_INTERFACES.inject([]) do |ary, intf|
-      ds_intf = Hash.new
-      ds_intf[:name] = intf[0]
-      ds_intf[:service_name] = intf[1]
-      ds_intf[:search_domain] = 'kentfieldschools.org'
-      ds_intf[:ip_address] = ip_address
-      ip_options = Computer.get_ip_options(self.ip_address, self.network_location, self.network_port)
-      ds_intf.merge!(ip_options) if ip_options
-      ary << HashWithIndifferentAccess.new(ds_intf)
+      is_airport_interface = (intf[1] =~ /airport/i)
+      if self.has_airport? || !is_airport_interface
+        ds_intf = Hash.new
+        ds_intf[:name] = intf[0]
+        ds_intf[:service_name] = intf[1]
+        ds_intf[:search_domain] = 'kentfieldschools.org'
+        if is_airport_interface
+          # always DHCP
+          ds_intf[:airport] = true
+          ds_intf[:ssid] = 'ksdnet1'
+        else
+          ds_intf[:ip_address] = ip_address
+          ip_options = Computer.get_ip_options(self.ip_address, 'Automatic', 'Built-in Ethernet')
+          ds_intf.merge!(ip_options) if ip_options
+        end
+        ary << HashWithIndifferentAccess.new(ds_intf)
+      end
       ary
     end
   end
@@ -223,7 +232,7 @@ class Computer < Asset
         network_port = nil
         if computer_name.downcase.match(/(ibook|powerbook|macbook)/) &&
           ['bteachers','kteachers'].include?(ard_list_tag)
-          network_location = 'KSD Airport'
+          network_location = 'Automatic'
           network_port = 'AirPort'
         end
         attrs = get_ip_options(ip_address, network_location, network_port)
@@ -336,12 +345,11 @@ class Computer < Asset
       ip_method = 'DHCP'
       if valid_ip_address?(ip_addr)
         ip_method = 'Manual'
-        network_location ||= 'KSD Ethernet'
+        network_location ||= 'Automatic'
         network_port ||= 'Built-in Ethernet'
         octets = ip_addr.split('.')
         if network_port == 'AirPort' || (octets[0] == '10' && octets[2].to_i >= 110)
           ip_method = 'DHCP'
-          network_location = 'KSD Airport'
           network_port = 'AirPort'
         end
       end

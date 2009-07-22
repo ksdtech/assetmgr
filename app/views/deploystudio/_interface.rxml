@@ -3,9 +3,9 @@ xml.dict {
   xml.key 'dstudio-dns-ips'
   xml.string interface[:dns_entries]  
   xml.key 'dstudio-host-airport'
-  xml.string 'NO'
+  xml.string interface[:airport] ? 'YES' : 'NO'
   xml.key 'dstudio-host-airport-name'
-  xml.string
+  xml.string interface[:ssid]
   xml.key 'dstudio-host-airport-password'
   xml.string
   xml.key 'dstudio-host-ftp-proxy'

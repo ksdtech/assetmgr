@@ -33,6 +33,10 @@
 		<td class="fieldinfo"><%=h @asset.ard_model_and_class %></td>
 	</tr>
 	<tr>
+		<td class="label"><label for="asset_architecture">Architecture:</label></td>
+		<td colspan="2" class="field"><%= f.select :architecture, [['Choose:', '' ], ['i386', 'i386'], ['ppc', 'ppc']] %></td>
+	</tr>
+	<tr>
 		<td class="label"><label for="asset_item_class">Type:</label></td>
 		<td colspan="2" class="field"><%= f.text_field :item_class, :size => 20 %></td>
 	</tr>
@@ -68,6 +72,10 @@
 	<tr>
 		<td class="label"><label for="asset_user">Net Location:</label></td>
 		<td colspan="2" class="field"><%= f.select :network_location, Asset::NETWORK_LOCATION_OPTIONS %></td>
+	</tr>
+	<tr>
+	  <td>&nbsp;</td>
+		<td colspan="2" class="field"><%= f.check_box :has_airport %>&nbsp;<label for="asset_has_airport">Has AirPort</label></td>
 	</tr>
 	<tr>
 		<td class="label"><label for="asset_user">Net Port:</label></td>

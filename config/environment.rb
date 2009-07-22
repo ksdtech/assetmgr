@@ -16,8 +16,14 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here
   
+  # Use 001_ numbering for migrations
+  config.active_record.timestamped_migrations = false
+  
   # Skip frameworks you're not going to use (only works if using vendor/rails)
   # config.frameworks -= [ :action_web_service, :action_mailer ]
+  
+  # Gem dependencies
+  config.gem "rubyzip", :lib=>"zip/zip", :version=>"~>0.9.1"
 
   # Only load the plugins named here, by default all plugins in vendor/plugins are loaded
   # config.plugins = %W( exception_notification ssl_requirement )

@@ -2,7 +2,7 @@ class Asset < ActiveRecord::Base
   include SearchableRecord
   
   STATUS_OPTIONS = ['', 'active', 'inactive', 'broken', 'stolen', 'lost', 'missing', 'surplus-2006-05', 'surplus-2008-03', 'surplus-2008-09', 'returned', 'disposed', 'bad record', 'unknown']
-  NETWORK_LOCATION_OPTIONS = ['', 'KSD Ethernet', 'KSD Airport', 'Automatic']
+  NETWORK_LOCATION_OPTIONS = ['', 'Automatic']
   NETWORK_PORT_OPTIONS = ['Built-in Ethernet', 'AirPort']
   IP_PATTERN = /^$|\A\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\Z/
   MAC_PATTERN = /^$|\A([0-9a-f]{2})(\:)?([0-9a-f]{2})(\:)?([0-9a-f]{2})(\:)?([0-9a-f]{2})(\:)?([0-9a-f]{2})(\:)?([0-9a-f]{2})\Z/i
