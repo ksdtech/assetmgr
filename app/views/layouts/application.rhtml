@@ -47,10 +47,12 @@
         <li><%= link_to 'Other Assets', others_path %></li>
         <li><%= link_to 'Surplus List', :controller => 'surplus', :action => 'index' %></li>
       </ul>
-      <h1>Imaging/NetRestore</h1>
+      <h1>Imaging/DeployStudio</h1>
       <ul>
         <li><%= link_to 'Machine Groups', machine_groups_path %></li>
         <li><%= link_to 'Configurations', :controller => 'nr_configurations', :action => 'index' %></li>
+        <li><%= link_to 'DeployStudio Bacich DB', :controller => 'deploystudio', :action => 'index', :params => { :loc => 'bacich' } %></li>
+        <li><%= link_to 'DeployStudio Kent DB', :controller => 'deploystudio', :action => 'index', :params => { :loc => 'kent' } %></li>
         <li><%= link_to 'NetRestore Settings', :controller => 'nr_parameters', :action => 'index' %></li>
       </ul>
       <h1>Other</h1>
