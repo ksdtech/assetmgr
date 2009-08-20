@@ -30,8 +30,9 @@ class DeploystudioController < ApplicationController
         end
       end
       # Send the file
+      loc = "-#{loc}" if loc
       send_file(@tempfile_path, :type => 'application/zip', 
-        :disposition => 'attachment', :filename => "deploystudio-byhost.zip")
+        :disposition => 'attachment', :filename => "deploystudio-byhost#{loc}.zip")
     else
       render :action => 'index', :layout => 'blank'
     end
