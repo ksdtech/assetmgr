@@ -9,7 +9,6 @@ class InventoryController < ApplicationController
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @assets.to_xml }
-      format.js   # index.rjs
     end
   end
 
